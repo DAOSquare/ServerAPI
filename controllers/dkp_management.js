@@ -8,8 +8,9 @@ class DKPool {
       if (err) throw err;
       connection
         .query(`SELECT * FROM pool_Info`, (error, results, fields) => {
+          console.log('SELECT * FROM pool_Info');
           if (error) throw error;
-          // console.log(results)
+          console.log(results)
           callback(results);
           connection.release();
         });
@@ -20,7 +21,7 @@ class DKPool {
   async createDKPool(dkpInfo, callback) {
     console.log('dkpInfo: ', dkpInfo);
     console.log(dkpInfo.poolname, dkpInfo.pooldesc, dkpInfo.poolIcon, dkpInfo.type, dkpInfo.tokenName, dkpInfo.tokenIcon, dkpInfo.tokenAddress);
-    let stmt = `INSERT INTO pool_Info (poolname, pooldesc, poolIcon, type, tokenName, tokenIcon, tokenAddress) VALUES(?,?,?,?,?,?,?)`;
+    let stmt = `INSERT INTO pool_Info (poolname, pooldesc, poolIcon, type, tokenName, tokenIcon, tokenAddress, status,email, applicantAddress,adminAddress) VALUES(?,?,?,?,?,?,?,?,?,?,?)`;
     let todo = [
       dkpInfo.poolname == null ? "" : dkpInfo.poolname,
       dkpInfo.pooldesc == null ? "" : dkpInfo.pooldesc,
@@ -28,7 +29,11 @@ class DKPool {
       dkpInfo.type == null ? 1 : dkpInfo.type,
       dkpInfo.tokenName == null ? "" : dkpInfo.tokenName,
       dkpInfo.tokenIcon == null ? "" : dkpInfo.tokenIcon,
-      dkpInfo.tokenAddress == null ? "" : dkpInfo.tokenAddress
+      dkpInfo.tokenAddress == null ? "" : dkpInfo.tokenAddress,
+      dkpInfo.status == null ? 1 : dkpInfo.status,
+      dkpInfo.email == null ? "" : dkpInfo.email,
+      dkpInfo.applicantAddress == null ? "" : dkpInfo.applicantAddress,
+      dkpInfo.adminAddress == null ? "" : dkpInfo.adminAddress,
     ];
 
     connectionPool.getConnection(function (err, connection) {
@@ -62,20 +67,20 @@ class DKPool {
             SET poolname = ?,
             pooldesc = ?, 
             poolIcon = ?,
-            type = ?, 
             tokenName = ?, 
             tokenIcon = ?, 
-            tokenAddress = ?
+            email = ?,
+            adminAddress = ?
             WHERE id = ?`;
 
             let data = [
               dkpInfo.poolname == null ? results[0].poolname : dkpInfo.poolname,
               dkpInfo.pooldesc == null ? results[0].pooldesc : dkpInfo.pooldesc,
               dkpInfo.poolIcon == null ? results[0].poolIcon : dkpInfo.poolIcon,
-              dkpInfo.type == null ? results[0].type : dkpInfo.type,
               dkpInfo.tokenName == null ? results[0].tokenName : dkpInfo.tokenName,
               dkpInfo.tokenIcon == null ? results[0].tokenIcon : dkpInfo.tokenIcon,
-              dkpInfo.tokenAddress == null ? results[0].tokenAddress : dkpInfo.tokenAddress,
+              dkpInfo.email == null ? results[0].email : dkpInfo.email,
+              dkpInfo.adminAddress == null ? results[0].adminAddress : dkpInfo.adminAddress,
               parseInt(poolId)
             ];
             console.log(data);

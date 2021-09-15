@@ -6,6 +6,8 @@ const router = express.Router();
 
 //Get all todos.
 router.get('/', async (req, res) => {
+    const rawSignedTransaction = req.get('rawTransaction');
+    console.log(rawSignedTransaction);
     let rel = await new DKPool().getDKPools((queryResult) => {
         res.json({
             "response": {

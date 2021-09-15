@@ -19,16 +19,20 @@ class Win {
     //create a win.
     async createWin(winInfo, callback) {
         console.log('winInfo: ', winInfo);
-        console.log(winInfo.win_name, winInfo.win_description, winInfo.external_url, winInfo.image_url, winInfo.supply, winInfo.timeStart, winInfo.timeEnd);
-        let stmt = `INSERT INTO win_Info (win_name, win_description, external_url, image_url, supply, timeStart, timeEnd) VALUES(?,?,?,?,?,?,?)`;
+        console.log(winInfo.nft_name, winInfo.nft_description, winInfo.pool_name, winInfo.nft_icon, winInfo.total_num_of_mint, winInfo.timeStart, winInfo.timeEnd);
+        let stmt = `INSERT INTO win_Info (nft_name, nft_description, pool_name, nft_icon, total_num_of_mint, timeStart, timeEnd, nft_address,cost_per_nft,status,applicantAddress) VALUES(?,?,?,?,?,?,?,?,?,?,?)`;
         let todo = [
-            winInfo.win_name == null ? "" : winInfo.win_name,
-            winInfo.win_description == null ? "" : winInfo.win_description,
-            winInfo.external_url == null ? "" : winInfo.external_url,
-            winInfo.image_url == null ? "" : winInfo.image_url,
-            winInfo.supply == null ? 0 : winInfo.supply,
+            winInfo.nft_name == null ? "" : winInfo.nft_name,
+            winInfo.nft_description == null ? "" : winInfo.nft_description,
+            winInfo.pool_name == null ? "" : winInfo.pool_name,
+            winInfo.nft_icon == null ? "" : winInfo.nft_icon,
+            winInfo.total_num_of_mint == null ? 0 : winInfo.total_num_of_mint,
             winInfo.timeStart == null ? 0 : winInfo.timeStart,
-            winInfo.timeEnd == null ? 0 : winInfo.timeEnd
+            winInfo.timeEnd == null ? 0 : winInfo.timeEnd,
+            winInfo.nft_address == null ? "" : winInfo.nft_address,
+            winInfo.cost_per_nft == null ? 0 : winInfo.cost_per_nft,
+            winInfo.status == null ? 1 : winInfo.status,
+            winInfo.nft_address == null ? "" : winInfo.nft_address,
         ];
 
         connectionPool.getConnection(function (err, connection) {
@@ -59,23 +63,27 @@ class Win {
                     if (results.length > 0) {
                         // update statment
                         let sql = `UPDATE win_Info
-                            SET win_name = ?,
-                            win_description = ?, 
-                            external_url = ?,
-                            image_url = ?, 
-                            supply = ?, 
+                            SET nft_name = ?,
+                            nft_description = ?, 
+                            pool_name = ?,
+                            nft_icon = ?, 
+                            total_num_of_mint = ?, 
                             timeStart = ?, 
-                            timeEnd = ?
+                            timeEnd = ?,
+                            cost_per_nft = ?,
+                            nft_address = ?
                             WHERE id = ?`;
 
                         let data = [
-                            winInfo.win_name == null ? results[0].win_name : winInfo.win_name,
-                            winInfo.win_description == null ? results[0].win_description : winInfo.win_description,
-                            winInfo.external_url == null ? results[0].external_url : winInfo.external_url,
-                            winInfo.image_url == null ? results[0].image_url : winInfo.image_url,
-                            winInfo.supply == null ? results[0].supply : winInfo.supply,
+                            winInfo.nft_name == null ? results[0].nft_name : winInfo.nft_name,
+                            winInfo.nft_description == null ? results[0].nft_description : winInfo.nft_description,
+                            winInfo.pool_name == null ? results[0].pool_name : winInfo.pool_name,
+                            winInfo.nft_icon == null ? results[0].nft_icon : winInfo.nft_icon,
+                            winInfo.total_num_of_mint == null ? results[0].total_num_of_mint : parseInt(winInfo.total_num_of_mint),
                             winInfo.timeStart == null ? results[0].timeStart : winInfo.timeStart,
                             winInfo.timeEnd == null ? results[0].timeEnd : winInfo.timeEnd,
+                            winInfo.cost_per_nft == null ? results[0].cost_per_nft : parseFloat(winInfo.cost_per_nft),
+                            winInfo.nft_address == null ? results[0].nft_address : winInfo.nft_address,
                             parseInt(winId)
                         ];
                         console.log(data);
