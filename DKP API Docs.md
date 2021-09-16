@@ -42,41 +42,41 @@ DKPool申请列表
 ### 返回示例
 ```json
 {
-response: {
+	"response": {
 		"status": 200,
 		"charset":UTF-8,
 		"respond_time": 2021-09-15 09:03:14,
 		"result": [
-				{
-						"id": 17,
-						"poolname": DKP1,
-						"pooldesc": test,
-						"poolIcon": fsdfsdfsdfsdfsdf,
-						"type": 1,
-						"tokenName": token1,
-						"tokenIcon": sdfsdfdf,
-						"tokenAddres":,
-						"status": null,
-						"applicantAddress": null,
-						"email": 123@163.com,
-						"adminAddress": sdfsdfdsfsdfdsfds
-				},
-				{
-						"id": 17,
-						"poolname": DKP1,
-						"pooldesc": test,
-						"poolIcon": fsdfsdfsdfsdfsdf,
-						"type": 1,
-						"tokenName": token1,
-						"tokenIcon": sdfsdfdf,
-						"tokenAddres":,
-						"status": null,
-						"applicantAddress": null,
-						"email": 123@163.com,
-						"adminAddress": sdfsdfdsfsdfdsfds
-				},
-			]
-		}
+			{
+				"id": 17,
+				"poolname": DKP1,
+				"pooldesc": test,
+				"poolIcon": fsdfsdfsdfsdfsdf,
+				"type": 1,
+				"tokenName": token1,
+				"tokenIcon": sdfsdfdf,
+				"tokenAddres":,
+				"status": null,
+				"applicantAddress": null,
+				"email": 123@163.com,
+				"adminAddress": sdfsdfdsfsdfdsfds
+			},
+			{
+				"id": 17,
+				"poolname": DKP1,
+				"pooldesc": test,
+				"poolIcon": fsdfsdfsdfsdfsdf,
+				"type": 1,
+				"tokenName": token1,
+				"tokenIcon": sdfsdfdf,
+				"tokenAddres":,
+				"status": null,
+				"applicantAddress": null,
+				"email": 123@163.com,
+				"adminAddress": sdfsdfdsfsdfdsfds
+			},
+		]
+	}
 }
 ```
 ## 接口名称
@@ -129,7 +129,7 @@ response: {
 ### 返回示例
 ```json
 {
-		"response": {
+	"response": {
 		"status": 200,
 		"charset":UTF-8,
 		"respond_time": 2021-09-15 08:04:38,
@@ -187,13 +187,13 @@ response: {
 
 ```json
 {
-		"response": {
+	"response": {
 		"status": 200,
 		"charset":UTF-8,
 		"respond_time": 2021-09-15 08:04:38,
 		"result": {
 			"changedRows": 1
-		}
+		}	
 	}
 }
 ```
@@ -243,34 +243,33 @@ NFT Win申请列表
 		"charset": UTF-8,
 		"respond_time": 2021-09-15 08:54:29,
 		"result": [
-				{
-					"id": 3,
-					"nft_name": test,
-					"nft_description": test,
-					"pool_name": DKP1,
-					"nft_icon": ,
-					"total_num_of_mint": 100000,
-					"timeStart": 342342,
-					"timeEnd": 243432,
-					"cost_per_nft“”: 9.2,
-					"nft_address"": 342353464,
-					"status": null,
-					"applicantAddress": null
-				},
-				{
-					"id": 3,
-					"nft_name": test,
-					"nft_description": test,
-					"pool_name": DKP1,
-					"nft_icon": ,
-					"total_num_of_mint": 100000,
-					"timeStart": 342342,
-					"timeEnd": 243432,
-					"cost_per_nft“”: 9.2,
-					"nft_address"": 342353464,
-					"status": null,
-					"applicantAddress": null
-				}
+			{
+				"id": 3,
+				"nft_name": test,
+				"nft_description": test,
+				"pool_name": DKP1,
+				"nft_icon": ,
+				"total_num_of_mint": 100000,
+				"timeStart": 342342,
+				"timeEnd": 243432,
+				"cost_per_nft“”: 9.2,
+				"nft_address"": 342353464,
+				"status": null,
+				"applicantAddress": null
+			},
+			{
+				"id": 3,
+				"nft_name": test,
+				"nft_description": test,
+				"pool_name": DKP1,
+				"nft_icon": ,
+				"total_num_of_mint": 100000,
+				"timeStart": 342342,
+				"timeEnd": 243432,
+				"cost_per_nft“”: 9.2,
+				"nft_address"": 342353464,
+				"status": null,
+				"applicantAddress": null
 			}
 		]
 	}
@@ -326,14 +325,14 @@ NFT Win申请列表
 
 ```json
 {
-		"response": {
+	"response": {
 		"status": 200,
 		"charset":UTF-8,
 		"respond_time": 2021-09-15 08:04:38,
 		"result": {
 			"affectedRows": 1
 		}
-	}
+}
 }
 ```
 
@@ -387,7 +386,7 @@ NFT Win申请列表
 
 ```json
 {
-		"response": {
+	"response": {
 		"status": 200,
 		"charset":UTF-8,
 		"respond_time": 2021-09-15 08:04:38,
