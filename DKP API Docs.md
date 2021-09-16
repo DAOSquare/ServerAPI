@@ -332,7 +332,7 @@ NFT Win申请列表
 		"result": {
 			"affectedRows": 1
 		}
-}
+	}
 }
 ```
 
