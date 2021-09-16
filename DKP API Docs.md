@@ -305,14 +305,14 @@ NFT Win申请列表
 | --- | --- | --- | --- | --- |
 | **nft\_name** | **是** | **String** | **无** | **要创建 NFT 的名字** |
 | **nft\_description** | **是** | **String** | **无** | **这个 NFT 的描述** |
-| **pool\_name** | **是** | **String** || **在哪个 POOL 下创建 NFT** |
-| **nft\_icon** | **是** | **String** | | **nft 的资源素材** |
-| **total\_num\_of\_mint** | **是** | **int** | | **总铸造量** |
-| **timeStart** | **是** | **int** || **开始兑换的时间 ( 时间戳 )** |
-| **timeEnd** | **是** | **int** || **结束兑换的时间 ( 时间戳 )** |
-| **cost\_per\_nft** | **是** | **Float** | | **每个 NFT 消耗 DKP 数量** |
-| **nft\_address** | **是** | **String** || |
-| **signed_Transaction** | **是** | **String** || **用户私钥签名后的交易 **||
+| **pool\_name** | **是** | **String** |**无** | **在哪个 POOL 下创建 NFT** |
+| **nft\_icon** | **是** | **String** | **无** | **nft 的资源素材** |
+| **total\_num\_of\_mint** | **是** | **int** | **无** | **总铸造量** |
+| **timeStart** | **是** | **int** |**无** | **开始兑换的时间 ( 时间戳 )** |
+| **timeEnd** | **是** | **int** |**无** | **结束兑换的时间 ( 时间戳 )** |
+| **cost\_per\_nft** | **是** | **Float** | **无** | **每个 NFT 消耗 DKP 数量** |
+| **nft\_address** | **是** | **String** |**无** | |
+| **signed_Transaction** | **是** | **String** |**无** | **用户私钥签名后的交易 **|
 ### 需要调用到的其他接口:
 
 | **接口名称** | **接口地址** | **用途说明** |
