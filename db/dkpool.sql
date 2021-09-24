@@ -1,21 +1,32 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 192.168.252.133
+ Source Server         : VMware Ubuntu
  Source Server Type    : MySQL
- Source Server Version : 50735
- Source Host           : 192.168.252.133:3306
+ Source Server Version : 50733
+ Source Host           : 192.168.32.204:3306
  Source Schema         : dkpool
 
  Target Server Type    : MySQL
- Target Server Version : 50735
+ Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 03/09/2021 22:05:56
+ Date: 25/09/2021 00:50:28
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for address_role
+-- ----------------------------
+DROP TABLE IF EXISTS `address_role`;
+CREATE TABLE `address_role`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '账户地址',
+  `role` int(8) NULL DEFAULT NULL COMMENT '用户角色 1 普通账户地址 2 管理员账户地址',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for pool_Info
@@ -23,15 +34,23 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `pool_Info`;
 CREATE TABLE `pool_Info`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `poolname` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '池子的名称',
-  `pooldesc` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '池子的描述',
+  `pool_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '池子的名称',
+  `pool_desc` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '池子的描述',
   `poolIcon` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '池子的图标url',
   `type` int(255) NULL DEFAULT NULL COMMENT '指定池子的类型。(1. donate: 捐赠池 2.stake：质押池)',
-  `tokenName` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'token的名称。',
+  `token_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'token的名称。',
   `tokenIcon` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'token图标的url',
-  `tokenAddress` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '与池子质押/捐赠接受的token地址。',
+  `token_address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '与池子质押/捐赠接受的token地址。',
+  `status` int(11) NULL DEFAULT NULL COMMENT '状态：1 待审批 2 审批通过 3审批不通过',
+  `applicant_address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '申请人地址',
+  `email` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '接收通知邮件地址',
+  `admin_address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'pool管理员地址',
+  `note` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `cost_per_token` int(11) NULL DEFAULT NULL,
+  `time_start` int(11) NULL DEFAULT NULL,
+  `time_end` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for win_Info
@@ -39,14 +58,18 @@ CREATE TABLE `pool_Info`  (
 DROP TABLE IF EXISTS `win_Info`;
 CREATE TABLE `win_Info`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `win_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '要创建NFT的名字',
-  `win_description` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '这个NFT的描述',
-  `external_url` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'openSea标准预留字段',
-  `image_url` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'nft的资源素材',
-  `supply` int(255) NULL DEFAULT NULL COMMENT '总铸造量',
-  `timeStart` int(11) NULL DEFAULT NULL COMMENT '开始兑换的时间',
-  `timeEnd` int(11) NULL DEFAULT NULL COMMENT '结束兑换的时间',
+  `nft_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '要创建NFT的名字',
+  `nft_description` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '这个NFT的描述',
+  `pool_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '在哪个POOL下创建NFT',
+  `nft_icon` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'nft的资源素材',
+  `total_num_of_mint` int(255) NULL DEFAULT NULL COMMENT '总铸造量',
+  `time_start` int(255) NULL DEFAULT NULL COMMENT '开始兑换的时间',
+  `time_end` int(255) NULL DEFAULT NULL COMMENT '结束兑换的时间',
+  `cost_per_nft` float NULL DEFAULT NULL COMMENT '每个NFT消耗DKP数量',
+  `nft_address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `status` int(2) NULL DEFAULT NULL COMMENT '状态：1 待审批 2 审批通过 3审批不通过',
+  `applicant_address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '申请人地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 SET FOREIGN_KEY_CHECKS = 1;
