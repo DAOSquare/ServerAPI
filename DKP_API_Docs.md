@@ -25,9 +25,7 @@ DKPool申请列表
 ### 请求地址
 
 
-
-47.241.127.229:3000/api/dkpool/
-
+http://47.241.127.229:3000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bcc36010bbdacd23278002f6b4bbfcdec75e90de5d6d06963d5ecc319ebdcb531aff06790079dc07c78f9782c8020bbd5abb01b&walletAddress=0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79&message=Hello%20world
 
 
 ### 请求方式
@@ -338,7 +336,7 @@ NFT Win申请列表
 
 
 
-47.241.127.229:3000/api/win/
+0x2efecd7f36034ccb70708a7f899bcc36010bbdacd23278002f6b4bbfcdec75e90de5d6d06963d5ecc319ebdcb531aff06790079dc07c78f9782c8020bbd5abb01b
 
 
 
@@ -572,7 +570,7 @@ NFT Win申请列表
 
 
 
-| **参数名** | **必选** | **类型**** / ****参数值** | **说明** |
+| **参数名** | **必选** | **类型 / 参数值** | **说明** |
 | --- | --- | --- | --- |
 | **rawSignedTransaction** | 是 | application/json | 用户签名消息 |
 
