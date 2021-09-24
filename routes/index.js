@@ -5,14 +5,13 @@
 */
 
 const express = require('express');
-const { route } = require('./dkp');
 const dkpRouter = require('./dkp'); // 引入dkp路由模块
 const winRouter = require('./win'); // 引入win路由模块
 
 const { jwtAuth, decode } = require('../utils/user-signed'); // 引入jwt认证函数
 const router = express.Router(); // 注册路由 
 
-router.use(decode); // 注入认证模块
+// router.use(decode); // 注入认证模块
 
 router.use('/api/dkpool', dkpRouter); // 注入dkp路由模块
 router.use('/api/win',winRouter)// 注入win路由模块

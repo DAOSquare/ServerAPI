@@ -7,6 +7,8 @@ const Web3 = require('web3');
 const web3 = new Web3(process.env.INFURA_RINKEBY_ENDPOINT);
 // const jwt = require('jsonwebtoken'); // 引入验证jsonwebtoken模块
 // const expressJwt = require('express-jwt'); // 引入express-jwt模块
+const sd = require('silly-datetime');
+
 const {
     PRIVATE_KEY
 } = require('./constant'); // 引入自定义的jwt密钥
@@ -44,10 +46,30 @@ const jwtAuth = expressJwt({
 // jwt-token解析
 const decode = (req, res, next) => {
     // console.log(req);
-    const rawSignedTransaction = req.get('rawTransaction');
-    console.log(rawSignedTransaction);
-    // return;
-    // return web3.eth.accounts.recoverTransaction(rawSignedTransaction);
+    const rawSignedTransaction = req.get('rawSignedTransaction');
+    console.log('rawSignedTransaction:', rawSignedTransaction);
+    if (rawSignedTransaction.length <= 0) {
+        res.json({
+            "response": {
+                "status": 404, //或其他状态码
+                "charset": "UTF-8", //定义返回内容的编码
+                "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
+                "message": "Signed Message Not Found"
+            }
+        });
+    }
+    const siginedAddr = web3.eth.accounts.recoverTransaction(rawSignedTransaction);
+    console.log('siginedAddr: ', siginedAddr);
+    if (siginedAddr.length <= 0) {
+        res.json({
+            "response": {
+                "status": 404, //或其他状态码
+                "charset": "UTF-8", //定义返回内容的编码
+                "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
+                "message": "Signature Varification Failed"
+            }
+        });
+    }
     next();
 
 }

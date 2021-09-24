@@ -2,12 +2,15 @@ const { connectionPool } = require("../db/mysql");
 
 class Win {
     //get all Wins.
-    async getWins(callback) {
+    async getWins(signAddr, callback) {
         // return results.rows;
         connectionPool.getConnection(function (err, connection) {
             if (err) throw err;
+            const querySQL = `SELECT * FROM win_Info where applicant_address = ?`;
+            let data = [signAddr];
+
             connection
-                .query(`SELECT * FROM win_Info`, (error, results, fields) => {
+                .query(querySQL, data, (error, results, fields) => {
                     if (error) throw error;
                     // console.log(results)
                     callback(results);
@@ -20,19 +23,23 @@ class Win {
     async createWin(winInfo, callback) {
         console.log('winInfo: ', winInfo);
         console.log(winInfo.nft_name, winInfo.nft_description, winInfo.pool_name, winInfo.nft_icon, winInfo.total_num_of_mint, winInfo.timeStart, winInfo.timeEnd);
-        let stmt = `INSERT INTO win_Info (nft_name, nft_description, pool_name, nft_icon, total_num_of_mint, timeStart, timeEnd, nft_address,cost_per_nft,status,applicantAddress) VALUES(?,?,?,?,?,?,?,?,?,?,?)`;
+        let stmt = `INSERT INTO win_Info (
+            nft_name, nft_description, pool_name, 
+            nft_icon, total_num_of_mint, time_start, 
+            time_end, cost_per_nft,status, 
+            applicant_address) VALUES(?,?,?,?,?,?,?,?,?,?)`;
         let todo = [
             winInfo.nft_name == null ? "" : winInfo.nft_name,
             winInfo.nft_description == null ? "" : winInfo.nft_description,
             winInfo.pool_name == null ? "" : winInfo.pool_name,
             winInfo.nft_icon == null ? "" : winInfo.nft_icon,
             winInfo.total_num_of_mint == null ? 0 : winInfo.total_num_of_mint,
-            winInfo.timeStart == null ? 0 : winInfo.timeStart,
-            winInfo.timeEnd == null ? 0 : winInfo.timeEnd,
-            winInfo.nft_address == null ? "" : winInfo.nft_address,
+            winInfo.time_start == null ? 0 : winInfo.time_start,
+            winInfo.time_end == null ? 0 : winInfo.time_end,
             winInfo.cost_per_nft == null ? 0 : winInfo.cost_per_nft,
-            winInfo.status == null ? 1 : winInfo.status,
-            winInfo.nft_address == null ? "" : winInfo.nft_address,
+            1,
+            winInfo.walletAddress == null ? "" : winInfo.walletAddress,
+
         ];
 
         connectionPool.getConnection(function (err, connection) {
