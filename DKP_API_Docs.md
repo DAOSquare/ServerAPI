@@ -488,7 +488,6 @@ http://47.241.127.229:3000/api/win/?signature=0x2efecd7f36034ccb70708a7f899bcc36
 | **time_start** | **是** | **int** |**无** | **开始兑换的时间 ( 时间戳 )** |
 | **time_end** | **是** | **int** |**无**   | **结束兑换的时间 ( 时间戳 )** |
 | **cost_per_nft** | **是** | **Float** | **无** | **每个 NFT 消耗 DKP 数量** |
-| **nft_address** | **是** | **String**  |**无** |    						  |
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
 | **walletAddress** | **是** | **String** | **无** | **用户地址** |
 | **message** | **是** | **String** | **无** | **签名内容** |
