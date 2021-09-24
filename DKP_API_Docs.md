@@ -47,7 +47,6 @@ DKPool申请列表
 
 
 | **参数名** | **必选** | **类型/参数值** | **说明** |
-
 | --- | --- | --- | --- |
 |||||||
 
@@ -56,9 +55,7 @@ DKPool申请列表
 
 
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
-
 | --- | --- | --- | --- | --- |
-
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
 | **walletAddress** | **是** | **String** | **无** | **用户地址** |
 | **message** | **是** | **String** | **无** | **签名内容** |
@@ -69,9 +66,7 @@ DKPool申请列表
 
 
 | **接口名称** | **接口地址** | **用途说明** |
-
 | --- | --- | --- |
-
 || | ||
 
 
@@ -85,77 +80,41 @@ DKPool申请列表
 ```json
 
 {
-
 	"response": {
-
 		"status": 200,
-
 		"charset":"UTF-8",
-
 		"respond_time": "2021-09-15 09:03:14",
-
 		"result": [
-
 			{
-
 				"id": 17,
-
 				"poolname": "DKP1",
-
 				"pooldesc": "test",
-
 				"poolIcon": "fsdfsdfsdfsdfsdf",
-
 				"type": 1,
-
 				"tokenName": "token1",
-
 				"tokenIcon": "sdfsdfdf",
-
 				"tokenAddres":,
-
 				"status": null,
-
 				"applicantAddress": null,
-
 				"email": "123@163.com",
-
 				"adminAddress": "sdfsdfdsfsdfdsfds"
-
 			},
-
 			{
-
 				"id": 17,
-
 				"poolname": "DKP1",
-
 				"pooldesc": "test",
-
 				"poolIcon": "fsdfsdfsdfsdfsdf",
-
 				"type": 1,
-
 				"tokenName": "token1",
-
 				"tokenIcon": "sdfsdfdf",
-
 				"tokenAddres":,
-
 				"status": null,
-
 				"applicantAddress": null,
-
 				"email": "123@163.com",
-
 				"adminAddress": "sdfsdfdsfsdfdsfds"
-
 			},
-
 		]
-
 	}
-
 }
 
 ```
@@ -180,7 +139,7 @@ DKPool申请列表
 
 
 
-47.241.127.229:3000/api/dkpool/new\_dkpool
+47.241.127.229:3000/api/dkpool/new_dkpool
 
 
 
@@ -201,9 +160,7 @@ DKPool申请列表
 
 
 | **参数名** | **必选** | **类型**** / ****参数值** | **说明** |
-
 | --- | --- | --- | --- |
-
 | **rawSignedTransaction** | 是 | application/json | 用户签名消息 |
 
 
@@ -213,33 +170,19 @@ DKPool申请列表
 
 
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
-
 | ------------ | --------- | --------- | ------------- | --------- |
-
 | **pool_name** | 是 | String | 无 | 池子的名称 |
-
 | **pool_desc** | **是** | **String** | **无** | **池子的描述** |
-
 | **poolIcon** | **是** | **String** | **无** | **池子的图标 url** |
-
 | **type** | **是** | **Int** |**无**| **指定池子的类型。 (1. donate:  捐赠池  2.Task 质押池3 Mission)** |
-
 | **token_name** | **是** | **String** |**无** |**token 的名称。** |
-
 | **tokenIcon** | **是** | **String** |**无**| **token 图标的 url** |
-
 | **token_address** | **是** | **String** |**无**| **与池子质押捐赠接受的 token 地址。** |
-
 | **email** | **是** | **String** |**无**|**接收通知邮件地址** |
-
 | **time_start** | **是** | **String** |**无**| **开始时间，timestamp时间戳格式 **|
-
 | **time_end** | **是** | **String** |**无**| **结束时间，timestamp时间戳格式  **|
-
 | **walletAddress** | **是** | **String** |**无**| **用户地址 **|
-
 | **signature** | **是** | **String** |**无**| **用户签名信息 **|
-
 | **message** | **是** | **String** |**无**| **签名内容 **|
 
 
@@ -251,9 +194,7 @@ DKPool申请列表
 
 
 | **接口名称** | **接口地址** | **用途说明** |
-
 | --- | --- | --- |
-
 |      |       ||     |
 
 
@@ -267,23 +208,14 @@ DKPool申请列表
 ```json
 
 {
-
 	"response": {
-
 		"status": 200,
-
 		"charset":"UTF-8",
-
 		"respond_time": "2021-09-15 08:04:38",
-
 		"result": {
-
 			"affectedRows": 1
-
 		}
-
 	}
-
 }
 
 ```
@@ -329,9 +261,7 @@ DKPool申请列表
 
 
 | **参数名** | **必选** | **类型**** / ****参数值** | **说明** |
-
 | --- | --- | --- | --- |
-
 | **rawSignedTransaction** | 是 | application/json | 用户签名消息 |
 
 
@@ -341,25 +271,15 @@ DKPool申请列表
 
 
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
-
 | --- | --- | --- | --- | --- |
-
 | **pooldesc** | **是** | **String** ||**池子的描述** |
-
 | **poolIcon** | **是** | **String** | | **池子的图标**** url** |
-
 | **admin_address** | **是** | **String** | | **pool 管理员地址** |
-
 | **tokenIcon** | **是** | **String** | | **token 图标的 url** |
-
 | **email** | **是** | **String** || **接收通知邮件地址** |
-
 | **token_name** | **是** | **String** || **token  的名称。** |
-
 | **walletAddress** | **是** | **String** |**无**| **用户地址 **|
-
 | **signature** | **是** | **String** |**无**| **用户签名信息 **|
-
 | **message** | **是** | **String** |**无**| **签名内容 **|
 
 
@@ -368,9 +288,7 @@ DKPool申请列表
 
 
 | **接口名称** | **接口地址** | **用途说明** |
-
 | --- | --- | --- |
-
 |||||
 
 
@@ -386,23 +304,14 @@ DKPool申请列表
 ```json
 
 {
-
 	"response": {
-
 		"status": 200,
-
 		"charset":"UTF-8",
-
 		"respond_time": "2021-09-15 08:04:38",
-
 		"result": {
-
 			"changedRows": 1
-
 		}	
-
 	}
-
 }
 
 ```
@@ -450,7 +359,6 @@ NFT Win申请列表
 
 
 | **参数名** | **必选** | **类型**** / ****参数值** | **说明** |
-
 | --- | --- | --- | --- |
 |||||||
 
@@ -461,9 +369,7 @@ NFT Win申请列表
 
 
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
-
 | --- | --- | --- | --- | --- |
-
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
 | **walletAddress** | **是** | **String** | **无** | **用户地址** |
 | **message** | **是** | **String** | **无** | **签名内容** |
@@ -475,9 +381,7 @@ NFT Win申请列表
 
 
 | **接口名称** | **接口地址** | **用途说明** |
-
 | --- | --- | --- |
-
 |||||
 
 ​
@@ -489,77 +393,41 @@ NFT Win申请列表
 ```json
 
 {
-
 	"response": {
-
 		"status": 200,
-
 		"charset": "UTF-8",
-
 		"respond_time": "2021-09-15 08:54:29",
-
 		"result": [
-
 			{
-
 				"id": 3,
-
 				"nft_name": "test",
-
 				"nft_description": "test",
-
 				"pool_name": "DKP1",
-
 				"nft_icon": ,
-
 				"total_num_of_mint": 100000,
-
 				"timeStart": 342342,
-
 				"timeEnd": 243432,
-
 				"cost_per_nft": 9.2,
-
 				"nft_address": "342353464",
-
 				"status": null,
-
 				"applicantAddress": null
-
 			},
-
 			{
-
 				"id": 3,
-
 				"nft_name": "test",
-
 				"nft_description": "test",
-
 				"pool_name": "DKP1",
-
 				"nft_icon": ,
-
 				"total_num_of_mint": 100000,
-
 				"timeStart": 342342,
-
 				"timeEnd": 243432,
-
 				"cost_per_nft": 9.2,
-
 				"nft_address": "342353464",
-
 				"status": null,
-
 				"applicantAddress": null
-
 			}
-
 		]
-
 	}
-
 }
 
 ```
@@ -605,7 +473,6 @@ NFT Win申请列表
 
 
 | **参数名** | **必选** | **类型**** / ****参数值** | **说明** |
-
 | --- | --- | --- | --- |
 
 
@@ -615,31 +482,18 @@ NFT Win申请列表
 
 
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
-
 | --- | --- | --- | --- | --- |
-
-| **nft\_name** | **是** | **String** | **无** | **要创建 NFT 的名字** |
-
-| **nft\_description** | **是** | **String** | **无** | **这个 NFT 的描述** |
-
-| **pool\_name** | **是** | **String** |**无** | **在哪个 POOL 下创建 NFT** |
-
-| **nft\_icon** | **是** | **String** | **无** | **nft 的资源素材** |
-
-| **total\_num\_of\_mint** | **是** | **int** | **无** | **总铸造量** |
-
+| **nft_name** | **是** | **String** | **无** | **要创建 NFT 的名字** |
+| **nft_description** | **是** | **String** | **无** | **这个 NFT 的描述** |
+| **pool_name** | **是** | **String** |**无** | **在哪个 POOL 下创建 NFT** |
+| **nft_icon** | **是** | **String** | **无** | **nft 的资源素材** |
+| **total_num_of_mint** | **是** | **int** | **无** | **总铸造量** |
 | **time_start** | **是** | **int** |**无** | **开始兑换的时间 ( 时间戳 )** |
-
 | **time_end** | **是** | **int** |**无**   | **结束兑换的时间 ( 时间戳 )** |
-
-| **cost\_per\_nft** | **是** | **Float** | **无** | **每个 NFT 消耗 DKP 数量** |
-
-| **nft\_address** | **是** | **String**  |**无** |    						  |
-
+| **cost_per_nft** | **是** | **Float** | **无** | **每个 NFT 消耗 DKP 数量** |
+| **nft_address** | **是** | **String**  |**无** |    						  |
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
-
 | **walletAddress** | **是** | **String** | **无** | **用户地址** |
-
 | **message** | **是** | **String** | **无** | **签名内容** |
 
 
@@ -648,9 +502,7 @@ NFT Win申请列表
 
 
 | **接口名称** | **接口地址** | **用途说明** |
-
 | --- | --- | --- |
-
 |||||
 
 
@@ -666,23 +518,14 @@ NFT Win申请列表
 ```json
 
 {
-
 	"response": {
-
 		"status": 200,
-
 		"charset":"UTF-8",
-
 		"respond_time": "2021-09-15 08:04:38",
-
 		"result": {
-
 			"affectedRows": 1
-
 		}
-
 	}
-
 }
 
 ```
@@ -709,7 +552,7 @@ NFT Win申请列表
 
 
 
-47.241.127.229:3000/api/win/win\_nft\_id
+47.241.127.229:3000/api/win/win_nft_id
 
 
 
@@ -730,9 +573,7 @@ NFT Win申请列表
 
 
 | **参数名** | **必选** | **类型**** / ****参数值** | **说明** |
-
 | --- | --- | --- | --- |
-
 | **rawSignedTransaction** | 是 | application/json | 用户签名消息 |
 
 
@@ -742,26 +583,16 @@ NFT Win申请列表
 
 
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
-
 | --- | --- | --- | --- | --- |
-
-| **nft\_name** | **是** | **String** | **无** | **要创建 NFT 的名字** |
-
-| **nft\_description** | **是** | **String** | **无** | **这个 NFT的描述** |
-
-| **pool\_name** | **是** | **String** | | **在哪个**** POOL 下创建 NFT** |
-
-| **nft\_icon** | **是** | **String** || **nft 的资源素材** |
-
-| **total\_num\_of\_mint** | **是** | **int** | | **总铸造量** |
-
+| **nft_name** | **是** | **String** | **无** | **要创建 NFT 的名字** |
+| **nft_description** | **是** | **String** | **无** | **这个 NFT的描述** |
+| **pool_name** | **是** | **String** | | **在哪个 POOL 下创建 NFT** |
+| **nft_icon** | **是** | **String** || **nft 的资源素材** |
+| **total_num_of_mint** | **是** | **int** | | **总铸造量** |
 | **timeStart** | **是** | **int** | | **开始兑换的时间**** ( ****时间戳**** )** |
-
 | **timeEnd** | **是** | **int** || **结束兑换的时间**** ( ****时间戳**** )** |
-
-| **cost\_per\_nft** | **是** | **Float** || **每个 NFT 消耗 DKP 数量** |
-
-| **nft\_address** | **是** | **String** | |||
+| **cost_per_nft** | **是** | **Float** || **每个 NFT 消耗 DKP 数量** |
+| **nft_address** | **是** | **String** | |||
 
 
 
@@ -770,9 +601,7 @@ NFT Win申请列表
 
 
 | **接口名称** | **接口地址** | **用途说明** |
-
 | --- | --- | --- |
-
 |||||
 
 
@@ -788,23 +617,14 @@ NFT Win申请列表
 ```json
 
 {
-
 	"response": {
-
 		"status": 200,
-
 		"charset":"UTF-8",
-
 		"respond_time": "2021-09-15 08:04:38",
-
 		"result": {
-
 			"changedRows": 1
-
 		}
-
 	}
-
 }
 
 ```
