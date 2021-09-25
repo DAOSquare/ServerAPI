@@ -7,10 +7,7 @@ const router = express.Router();
 
 //Get all pools.
 router.get('/', async (req, res) => {
-    const address = req.query.walletAddress;
-    const message = req.query.message;
-    const signature = req.query.signature;
-    if (address == null || message == null || signature == null) {
+    if (req.query.walletAddress == null || req.query.message == null || req.query.signature == null) {
         res.json({
             "response": {
                 "status": 400, //或其他状态码
@@ -21,8 +18,12 @@ router.get('/', async (req, res) => {
                 }
             }
         });
+        return;
     }
-    const verifyResult = veirySignature(address, message, signature);
+    const address = req.query.walletAddress;
+    const message = req.query.message;
+    const signature = req.query.signature;
+    const verifyResult = await veirySignature(address, message, signature);
     if (!verifyResult) {
         res.json({
             "response": {
@@ -34,6 +35,7 @@ router.get('/', async (req, res) => {
                 }
             }
         });
+        return;
     }
     let rel = await new DKPool().getDKPools(address, (queryResult) => {
         res.json({
@@ -50,8 +52,7 @@ router.get('/', async (req, res) => {
 
 //Get pool by poolId.
 router.get('/:poolId', async (req, res) => {
-    if (req.params.poolId) {
-
+    if (req.params.poolId && checkIfInteger(req.params.poolId)) {
         let rel = await new DKPool().getPoolInfoByPoolID(req.params.poolId, (queryResult) => {
             res.json({
                 "response": {
@@ -63,15 +64,36 @@ router.get('/:poolId', async (req, res) => {
             });
         });
     }
+    else {
+        res.json({
+            "response": {
+                "status": 400, //或其他状态码
+                "charset": "UTF-8", //定义返回内容的编码
+                "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
+                "result": { //返回的结果
+                    "error message": "poolId Error",
+                }
+            }
+        });
+    }
 });
 
 //Create a pool.
 router.post('/new_dkpool', async (req, res) => {
     let formData = req.body;
-    if (formData.pool_name == null || formData.pool_desc == null || formData.poolIcon == null ||
-        formData.type == null || formData.token_name == null || formData.tokenIcon == null ||
-        formData.token_address == null || formData.email == null || formData.walletAddress == null ||
-        formData.signature == null || formData.message == null || formData.time_start == null || formData.time_end == null) {
+    if (formData.pool_name == null || formData.pool_name == '' ||
+        formData.pool_desc == null || formData.pool_desc == '' ||
+        formData.poolIcon == null || formData.poolIcon == '' ||
+        formData.type == null || formData.type == '' ||
+        formData.token_name == null || formData.token_name == '' ||
+        formData.tokenIcon == null || formData.tokenIcon == '' ||
+        formData.token_address == null || formData.token_address == '' ||
+        formData.email == null || formData.email == '' ||
+        formData.walletAddress == null || formData.walletAddress == '' ||
+        formData.signature == null || formData.signature == '' ||
+        formData.message == null || formData.message == '' ||
+        formData.time_start == null || formData.time_start == '' ||
+        formData.time_end == null || formData.time_end == '') {
         res.json({
             "response": {
                 "status": 400, //或其他状态码
@@ -82,9 +104,10 @@ router.post('/new_dkpool', async (req, res) => {
                 }
             }
         });
+        return;
     }
     else {
-        const verifyResult = veirySignature(formData.walletAddress, formData.message, formData.signature);
+        const verifyResult = await veirySignature(formData.walletAddress, formData.message, formData.signature);
         if (!verifyResult) {
             res.json({
                 "response": {
@@ -96,6 +119,7 @@ router.post('/new_dkpool', async (req, res) => {
                     }
                 }
             });
+            return;
         }
         if (!checkName(formData.pool_name) || !checkName(formData.pool_desc)) {
             res.json({
@@ -108,6 +132,7 @@ router.post('/new_dkpool', async (req, res) => {
                     }
                 }
             });
+            return;
         }
         await new DKPool().createDKPool(formData, (queryResult) => {
             console.log(queryResult)
@@ -158,9 +183,10 @@ router.put('/:poolId', async (req, res) => {
                     }
                 }
             });
+            return;
         }
 
-        const verifyResult = veirySignature(formData.admin_address, formData.message, formData.signature);
+        const verifyResult = await veirySignature(formData.admin_address, formData.message, formData.signature);
         if (!verifyResult) {
             res.json({
                 "response": {
@@ -172,6 +198,7 @@ router.put('/:poolId', async (req, res) => {
                     }
                 }
             });
+            return;
         }
 
         let poolId = parseInt(req.params.poolId);
@@ -227,6 +254,7 @@ router.put('/audit/:poolId', async (req, res) => {
                         }
                     }
                 });
+                return;
             }
         })
         let formData = req.body;
@@ -242,6 +270,7 @@ router.put('/audit/:poolId', async (req, res) => {
                     }
                 }
             });
+            return;
         }
         if (checkIfInteger(formData.audit_result) && (parseInt(formData.audit_result) == 2 || parseInt(formData.audit_result) == 3)) {
 
@@ -256,8 +285,9 @@ router.put('/audit/:poolId', async (req, res) => {
                     }
                 }
             });
+            return;
         }
-        const verifyResult = veirySignature(formData.admin_address, formData.message, formData.signature);
+        const verifyResult = await veirySignature(formData.admin_address, formData.message, formData.signature);
         if (!verifyResult) {
             res.json({
                 "response": {
@@ -269,6 +299,7 @@ router.put('/audit/:poolId', async (req, res) => {
                     }
                 }
             });
+            return;
         }
 
         let poolId = parseInt(req.params.poolId);

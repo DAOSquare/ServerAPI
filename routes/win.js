@@ -22,8 +22,9 @@ router.get('/', async (req, res) => {
                 }
             }
         });
+        return;
     }
-    const verifyResult = veirySignature(address, message, signature);
+    const verifyResult = await veirySignature(address, message, signature);
     if (!verifyResult) {
         res.json({
             "response": {
@@ -35,6 +36,7 @@ router.get('/', async (req, res) => {
                 }
             }
         });
+        return;
     }
 
     let rel = await new Win().getWins(address, (queryResult) => {
@@ -53,35 +55,7 @@ router.get('/', async (req, res) => {
 
 //Get  wininfo by winid.
 router.get('/:winId', async (req, res) => {
-    // const address = req.query.walletAddress;
-    // const message = req.query.message;
-    // const signature = req.query.signature;
-    // if (address == null || message == null || signature == null) {
-    //     res.json({
-    //         "response": {
-    //             "status": 400, //或其他状态码
-    //             "charset": "UTF-8", //定义返回内容的编码
-    //             "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
-    //             "result": { //返回的结果
-    //                 "error message": "params walletAddress or message or signature not found",
-    //             }
-    //         }
-    //     });
-    // }
-    // const verifyResult = veirySignature(address, message, signature);
-    // if (!verifyResult) {
-    //     res.json({
-    //         "response": {
-    //             "status": 400, //或其他状态码
-    //             "charset": "UTF-8", //定义返回内容的编码
-    //             "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
-    //             "result": { //返回的结果
-    //                 "error message": "Signature Verify Failed",
-    //             }
-    //         }
-    //     });
-    // }
-    if (req.params.winId) {
+    if (req.params.winId && checkIfInteger(req.params.winId)) {
         let rel = await new Win().getwinnfoByWinID(req.params.winId, (queryResult) => {
             res.json({
                 "response": {
@@ -93,16 +67,36 @@ router.get('/:winId', async (req, res) => {
             });
         });
     }
+    else {
+        res.json({
+            "response": {
+                "status": 400, //或其他状态码
+                "charset": "UTF-8", //定义返回内容的编码
+                "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
+                "result": { //返回的结果
+                    "error message": "winId Error",
+                }
+            }
+        });
+    }
 });
 
 
 //Create a win.
 router.post('/new_win', async (req, res) => {
     let formData = req.body;
-    if (formData.nft_name == null || formData.nft_description == null || formData.pool_name == null ||
-        formData.nft_icon == null || formData.total_num_of_mint == null || formData.time_start == null ||
-        formData.time_end == null || formData.cost_per_nft == null ||
-        formData.walletAddress == null || formData.signature == null || formData.message == null) {
+    console.log(formData);
+    if (formData.nft_name == null || formData.nft_name.length == 0 ||
+        formData.nft_description == null || formData.nft_description.length == 0 ||
+        formData.pool_name == null || formData.pool_name.length == 0 ||
+        formData.nft_icon == null || formData.nft_icon.length == 0 ||
+        formData.total_num_of_mint == null || formData.total_num_of_mint == '' ||
+        formData.time_start == null || formData.time_start.length == '' ||
+        formData.time_end == null || formData.time_end == '' ||
+        formData.cost_per_nft == null || formData.cost_per_nft == '' ||
+        formData.walletAddress == null || formData.walletAddress.length == 0 ||
+        formData.signature == null || formData.signature.length == 0 ||
+        formData.message == null || formData.message.length == 0) {
         res.json({
             "response": {
                 "status": 400, //或其他状态码
@@ -114,7 +108,7 @@ router.post('/new_win', async (req, res) => {
             }
         });
     } else {
-        const verifyResult = veirySignature(formData.walletAddress, formData.message, formData.signature);
+        const verifyResult = await veirySignature(formData.walletAddress, formData.message, formData.signature);
         if (!verifyResult) {
             res.json({
                 "response": {
@@ -126,6 +120,7 @@ router.post('/new_win', async (req, res) => {
                     }
                 }
             });
+            return;
         }
         await new Win().createWin(formData, (queryResult) => {
             if (queryResult && queryResult.affectedRows > 0) {
@@ -147,7 +142,6 @@ router.post('/new_win', async (req, res) => {
                         "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
                         "result": { //返回的结果
                             "affectedRows": 0,
-
                         }
                     }
                 });
@@ -178,9 +172,10 @@ router.put('/:winId', async (req, res) => {
                 }
             }
         });
+        return;
     }
 
-    const verifyResult = veirySignature(formData.walletAddress, formData.message, formData.signature);
+    const verifyResult = await veirySignature(formData.walletAddress, formData.message, formData.signature);
     if (!verifyResult) {
         res.json({
             "response": {
@@ -192,13 +187,10 @@ router.put('/:winId', async (req, res) => {
                 }
             }
         });
+        return;
     }
 
     let winId = req.params.winId;
-    console.log(winId);
-    let winInfo = req.query;
-    // const formData = req.body;
-    console.log(formData);
     await new Win().updateWin(winId, formData, (queryResult) => {
         if (queryResult && queryResult.changedRows > 0) {
             res.json({
@@ -228,7 +220,7 @@ router.put('/:winId', async (req, res) => {
 
 //Audit a win.
 router.put('/audit/:winId', async (req, res) => {
-    if (req.params.winId) {
+    if (req.params.winId && checkIfInteger(req.params.winId)) {
         await new Win().getwinnfoByWinID(req.params.winId, (queryResult) => {
             if (queryResult.length <= 0) {
                 res.json({
@@ -242,10 +234,13 @@ router.put('/audit/:winId', async (req, res) => {
                     }
                 });
             }
+            return;
         })
         let formData = req.body;
-        if (formData.audit_result == null || formData.walletAddress == null ||
-            formData.signature == null || formData.message == null) {
+        if (formData.audit_result == null || formData.audit_result == '' ||
+            formData.walletAddress == null || formData.walletAddress.length == 0 ||
+            formData.signature == null || formData.signature.length == 0 ||
+            formData.message == null || formData.message.length == 0) {
             res.json({
                 "response": {
                     "status": 400, //或其他状态码
@@ -256,6 +251,7 @@ router.put('/audit/:winId', async (req, res) => {
                     }
                 }
             });
+            return;
         }
         if (checkIfInteger(formData.audit_result) && (parseInt(formData.audit_result) == 2 || parseInt(formData.audit_result) == 3)) {
 
@@ -270,8 +266,9 @@ router.put('/audit/:winId', async (req, res) => {
                     }
                 }
             });
+            return;
         }
-        const verifyResult = veirySignature(formData.admin_address, formData.message, formData.signature);
+        const verifyResult = await veirySignature(formData.walletAddress, formData.message, formData.signature);
         if (!verifyResult) {
             res.json({
                 "response": {
@@ -283,6 +280,7 @@ router.put('/audit/:winId', async (req, res) => {
                     }
                 }
             });
+            return;
         }
 
         let winId = parseInt(req.params.winId);
@@ -319,7 +317,7 @@ router.put('/audit/:winId', async (req, res) => {
             res.send("param poolId must be integer")
         }
     } else {
-        res.send("no poolId provided")
+        res.send("no winId provided")
     }
 });
 
