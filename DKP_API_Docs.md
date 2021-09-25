@@ -137,7 +137,7 @@ http://47.241.127.229:3000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bc
 ### 请求地址
 
 
-http://47.241.127.229:3000/api/dkpool/:poolId
+http://47.241.127.229:3000/api/dkpool/poolId
 
 
 ### 请求方式
