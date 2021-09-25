@@ -271,14 +271,14 @@ http://47.241.127.229:3000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bc
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
 | --- | --- | --- | --- | --- |
 | **pooldesc** | **是** | **String** ||**池子的描述** |
-| **poolIcon** | **是** | **String** | | **池子的图标**** url** |
+| **poolIcon** | **是** | **String** | | **池子的图标 url** |
 | **admin_address** | **是** | **String** | | **pool 管理员地址** |
 | **tokenIcon** | **是** | **String** | | **token 图标的 url** |
 | **email** | **是** | **String** || **接收通知邮件地址** |
 | **token_name** | **是** | **String** || **token  的名称。** |
-| **walletAddress** | **是** | **String** |**无**| **用户地址 **|
-| **signature** | **是** | **String** |**无**| **用户签名信息 **|
-| **message** | **是** | **String** |**无**| **签名内容 **|
+| **walletAddress** | **是** | **String** |**无**| **用户地址**|
+| **signature** | **是** | **String** |**无**| **用户签名信息**|
+| **message** | **是** | **String** |**无**| **签名内容**|
 
 
 ### 需要调用到的其他接口:
@@ -335,7 +335,7 @@ http://47.241.127.229:3000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bc
 
 
 
-47.241.127.229:3000/api/dkpool/audit、poolid
+47.241.127.229:3000/api/dkpool/audit/poolid
 
 
 
