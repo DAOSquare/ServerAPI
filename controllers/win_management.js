@@ -19,6 +19,23 @@ class Win {
         });
     }
 
+    async getwinnfoByWinID(winId, callback) {
+        // return results.rows;
+        connectionPool.getConnection(function (err, connection) {
+            if (err) throw err;
+            const querySQL = `SELECT * FROM win_Info where id = ?`;
+            let data = [parseInt(winId)];
+
+            connection
+                .query(querySQL, data, (error, results, fields) => {
+                    if (error) throw error;
+                    // console.log(results)
+                    callback(results);
+                    connection.release();
+                });
+        });
+    }
+
     //create a win.
     async createWin(winInfo, callback) {
         console.log('winInfo: ', winInfo);
@@ -57,7 +74,7 @@ class Win {
             return;
         });
     }
-    //update a DKPool.
+    //update a win.
     async updateWin(winId, winInfo, callback) {
         console.log(winInfo);
         //get the previous Win.
@@ -70,27 +87,59 @@ class Win {
                     if (results.length > 0) {
                         // update statment
                         let sql = `UPDATE win_Info
-                            SET nft_name = ?,
-                            nft_description = ?, 
-                            pool_name = ?,
-                            nft_icon = ?, 
-                            total_num_of_mint = ?, 
-                            timeStart = ?, 
-                            timeEnd = ?,
-                            cost_per_nft = ?,
-                            nft_address = ?
+                            SET 
+                            nft_icon = ?
                             WHERE id = ?`;
 
                         let data = [
-                            winInfo.nft_name == null ? results[0].nft_name : winInfo.nft_name,
-                            winInfo.nft_description == null ? results[0].nft_description : winInfo.nft_description,
-                            winInfo.pool_name == null ? results[0].pool_name : winInfo.pool_name,
                             winInfo.nft_icon == null ? results[0].nft_icon : winInfo.nft_icon,
-                            winInfo.total_num_of_mint == null ? results[0].total_num_of_mint : parseInt(winInfo.total_num_of_mint),
-                            winInfo.timeStart == null ? results[0].timeStart : winInfo.timeStart,
-                            winInfo.timeEnd == null ? results[0].timeEnd : winInfo.timeEnd,
-                            winInfo.cost_per_nft == null ? results[0].cost_per_nft : parseFloat(winInfo.cost_per_nft),
-                            winInfo.nft_address == null ? results[0].nft_address : winInfo.nft_address,
+                            parseInt(winId)
+                        ];
+                        console.log(data);
+                        connection
+                            .query(sql, data, (error, results, fields) => {
+                                if (error) throw error;
+                                callback(results);
+                                console.log('=========================================================================================================================')
+                                console.log(`Update win_Info Table succeed`);
+                                console.log('=========================================================================================================================')
+                                console.log('\n')
+                            });
+                    } else {
+                        callback();
+                    }
+                    connection.release();
+                    return;
+                });
+            return;
+        });
+
+
+
+        //update the checked todo
+        return;
+    }
+
+
+    //audit a win.
+    async auditWin(winId, winInfo, callback) {
+        console.log(winInfo);
+        //get the previous Win.
+        connectionPool.getConnection(function (err, connection) {
+            if (err) throw err;
+            connection
+                .query(`SELECT * FROM win_Info WHERE id = ?`, [parseInt(winId)], (error, results, fields) => {
+                    if (error) throw error;
+                    // console.log(fields);
+                    if (results.length > 0) {
+                        // update statment
+                        let sql = `UPDATE win_Info
+                            SET 
+                            status = ?
+                            WHERE id = ?`;
+
+                        let data = [
+                            winInfo.audit_result,
                             parseInt(winId)
                         ];
                         console.log(data);

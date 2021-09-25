@@ -2,10 +2,10 @@ const express = require("express");
 const DKPool = require('../controllers/dkp_management');
 const sd = require('silly-datetime');
 const { veirySignature } = require('../utils/recoverTx');
-const { checkName } = require('../utils/utils');
+const { checkName, checkIfInteger } = require('../utils/utils');
 const router = express.Router();
 
-//Get all todos.
+//Get all pools.
 router.get('/', async (req, res) => {
     const address = req.query.walletAddress;
     const message = req.query.message;
@@ -48,7 +48,24 @@ router.get('/', async (req, res) => {
 
 });
 
-//Create a todo.
+//Get pool by poolId.
+router.get('/:poolId', async (req, res) => {
+    if (req.params.poolId) {
+
+        let rel = await new DKPool().getPoolInfoByPoolID(req.params.poolId, (queryResult) => {
+            res.json({
+                "response": {
+                    "status": 200, //或其他状态码
+                    "charset": "UTF-8", //定义返回内容的编码
+                    "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
+                    "result": queryResult
+                }
+            });
+        });
+    }
+});
+
+//Create a pool.
 router.post('/new_dkpool', async (req, res) => {
     let formData = req.body;
     if (formData.pool_name == null || formData.pool_desc == null || formData.poolIcon == null ||
@@ -122,7 +139,7 @@ router.post('/new_dkpool', async (req, res) => {
     }
 });
 
-//Update a todo.
+//Update a pool.
 router.put('/:poolId', async (req, res) => {
     if (req.params.poolId) {
 
@@ -195,7 +212,104 @@ router.put('/:poolId', async (req, res) => {
     }
 });
 
-//Delete a todo.
+//Audit a pool.
+router.put('/audit/:poolId', async (req, res) => {
+    if (req.params.poolId) {
+        await new DKPool().getPoolInfoByPoolID(req.params.poolId, (queryResult) => {
+            if (queryResult.length <= 0) {
+                res.json({
+                    "response": {
+                        "status": 400, //或其他状态码
+                        "charset": "UTF-8", //定义返回内容的编码
+                        "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
+                        "result": { //返回的结果
+                            "error message": "Pool Not Found By poolId " + req.params.poolId,
+                        }
+                    }
+                });
+            }
+        })
+        let formData = req.body;
+        if (formData.audit_result == null || formData.walletAddress == null ||
+            formData.signature == null || formData.message == null) {
+            res.json({
+                "response": {
+                    "status": 400, //或其他状态码
+                    "charset": "UTF-8", //定义返回内容的编码
+                    "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
+                    "result": { //返回的结果
+                        "error message": "Form Params Error",
+                    }
+                }
+            });
+        }
+        if (checkIfInteger(formData.audit_result) && (parseInt(formData.audit_result) == 2 || parseInt(formData.audit_result) == 3)) {
+
+        } else {
+            res.json({
+                "response": {
+                    "status": 400, //或其他状态码
+                    "charset": "UTF-8", //定义返回内容的编码
+                    "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
+                    "result": { //返回的结果
+                        "error message": "audit_result can only be equal to 2 or 3",
+                    }
+                }
+            });
+        }
+        const verifyResult = veirySignature(formData.admin_address, formData.message, formData.signature);
+        if (!verifyResult) {
+            res.json({
+                "response": {
+                    "status": 400, //或其他状态码
+                    "charset": "UTF-8", //定义返回内容的编码
+                    "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
+                    "result": { //返回的结果
+                        "error message": "Signature Verify Failed",
+                    }
+                }
+            });
+        }
+
+        let poolId = parseInt(req.params.poolId);
+        console.log(poolId);
+        // let dkpInfo = req.query;
+        if ((poolId | 0) === poolId) {
+            await new DKPool().auditDKPool(poolId, formData, (queryResult) => {
+                if (queryResult && queryResult.changedRows > 0) {
+                    res.json({
+                        "response": {
+                            "status": 200, //或其他状态码
+                            "charset": "UTF-8", //定义返回内容的编码
+                            "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
+                            "result": {
+                                "changedRows": queryResult.changedRows//返回的结果
+                            }
+                        }
+                    });
+                } else {
+                    res.json({
+                        "response": {
+                            "status": 100, //或其他状态码
+                            "charset": "UTF-8", //定义返回内容的编码
+                            "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
+                            "result": {
+                                "changedRows": 0//返回的结果
+                            }
+                        }
+                    });
+                }
+            });
+
+        } else {
+            res.send("param poolId must be integer")
+        }
+    } else {
+        res.send("no poolId provided")
+    }
+});
+
+//Delete a pool.
 router.delete('/:poolId', async (req, res) => {
     if (req.params.poolId) {
         let poolId = parseInt(req.params.poolId);

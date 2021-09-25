@@ -118,6 +118,67 @@ class DKPool {
     return;
   }
 
+  async getPoolInfoByPoolID(poolId, callback) {
+    connectionPool.getConnection(function (err, connection) {
+      if (err) throw err;
+      connection
+        .query(`SELECT * FROM pool_Info WHERE id = ?`, [parseInt(poolId)], (error, results, fields) => {
+          if (error) throw error;
+          // console.log(fields);
+          callback(results);
+          connection.release();
+        })
+    })
+  }
+
+  //update a DKPool.
+  async auditDKPool(poolId, dkpInfo, callback) {
+    console.log(dkpInfo);
+    //get the previous DKPool.
+    connectionPool.getConnection(function (err, connection) {
+      if (err) throw err;
+      connection
+        .query(`SELECT * FROM pool_Info WHERE id = ?`, [parseInt(poolId)], (error, results, fields) => {
+          if (error) throw error;
+          // console.log(fields);
+          if (results.length > 0) {
+            // update statment
+            let sql = `UPDATE pool_Info
+            SET
+            status = ?
+            WHERE id = ?`;
+
+            let data = [
+              dkpInfo.audit_result,
+              parseInt(poolId)
+            ];
+            console.log(data);
+            connection
+              .query(sql, data, (error, results, fields) => {
+                if (error) throw error;
+                console.log(results);
+                callback(results);
+                console.log('=========================================================================================================================')
+                console.log(`Update dkpool Table succeed`);
+                console.log('=========================================================================================================================')
+                console.log('\n')
+              });
+          } else {
+            callback();
+          }
+          connection.release();
+          return;
+        });
+      return;
+    });
+
+
+
+    //update the checked todo
+    return;
+  }
+
+
   //delete a dkpool.
   async deletedkpool(poolId, callback) {
     // DELETE statment
