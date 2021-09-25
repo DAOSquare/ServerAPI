@@ -13,7 +13,7 @@ const routes = require('./routes'); //导入自定义路由文件，创建模块
 const session = require('express-session'); // 引入express-session模块，用于服务器端操作session
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 // app.use('/static', express.static(path.join(__dirname, 'public'))); // 静态资源
 app.use(bodyParser.json()); // 解析json数据格式
@@ -41,7 +41,7 @@ app.all('*', function (req, res, next) {
 
 app.use(
   cors({
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:5000'],
     methods: ['get', 'post', 'put', 'delete'],
     allowedHeaders: ['Content-Type', 'Authorization']
   })
@@ -51,5 +51,5 @@ app.use('/', routes);
 
 
 app.listen(port, () => { // 监听3000端口
-	console.log('服务已启动 http://localhost:3000');
+	console.log('服务已启动 http://localhost:5000');
 })
