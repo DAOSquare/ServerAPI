@@ -270,12 +270,12 @@ http://47.241.127.229:3000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bc
 
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
 | --- | --- | --- | --- | --- |
-| **pooldesc** | **是** | **String** ||**池子的描述** |
-| **poolIcon** | **是** | **String** | | **池子的图标 url** |
+| **pooldesc** | **是** | **String** |**无**|**池子的描述** |
+| **poolIcon** | **是** | **String** | **无**| **池子的图标 url** |
 | **admin_address** | **是** | **String** | | **pool 管理员地址** |
-| **tokenIcon** | **是** | **String** | | **token 图标的 url** |
-| **email** | **是** | **String** || **接收通知邮件地址** |
-| **token_name** | **是** | **String** || **token  的名称。** |
+| **tokenIcon** | **是** | **String** |**无** | **token 图标的 url** |
+| **email** | **是** | **String** |**无**| **接收通知邮件地址** |
+| **token_name** | **是** | **String** |**无**| **token  的名称。** |
 | **walletAddress** | **是** | **String** |**无**| **用户地址**|
 | **signature** | **是** | **String** |**无**| **用户签名信息**|
 | **message** | **是** | **String** |**无**| **签名内容**|
@@ -674,7 +674,7 @@ http://47.241.127.229:3000/api/win/?signature=0x2efecd7f36034ccb70708a7f899bcc36
 
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
 | --- | --- | --- | --- | --- |
-| **nft_icon** | **是** | **String** || **nft 的资源素材** |
+| **nft_icon** | **是** | **String** |**无**| **nft 的资源素材** |
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
 | **walletAddress** | **是** | **String** | **无** | **用户地址** |
 | **message** | **是** | **String** | **无** | **签名内容** |
