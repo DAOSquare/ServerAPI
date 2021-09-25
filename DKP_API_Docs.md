@@ -117,6 +117,104 @@ http://47.241.127.229:3000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bc
 
 ```
 
+
+## 接口名称
+
+
+
+根据poolId获取 DKPool申请信息
+
+
+
+### 接口描述
+
+
+
+- 根据poolId获取 DKPool申请信息
+
+
+
+### 请求地址
+
+
+http://47.241.127.229:3000/api/dkpool/:poolId
+
+
+### 请求方式
+
+
+
+**GET**
+
+
+
+### 请求参数
+
+
+
+#### Header 参数
+
+
+
+| **参数名** | **必选** | **类型/参数值** | **说明** |
+| --- | --- | --- | --- |
+|||||||
+
+#### 参数
+
+
+
+| **参数名** | **必选** | **类型** | **限制条件** | **说明** |
+| --- | --- | --- | --- | --- |
+|||||||
+
+
+### 需要调用到的其他接口:
+
+
+
+| **接口名称** | **接口地址** | **用途说明** |
+| --- | --- | --- |
+|| | ||
+
+
+
+
+### 返回示例
+
+```json
+
+{
+    "response": {
+        "status": 200,
+        "charset": "UTF-8",
+        "respond_time": "2021-09-25 08:58:22",
+        "result": [
+            {
+                "id": 30,
+                "pool_name": "ff1ff3ffff",
+                "pool_desc": "test",
+                "poolIcon": "sdfsd",
+                "type": 1,
+                "token_name": "TEST_TOKEN",
+                "tokenIcon": "232342",
+                "token_address": "sdfsdf",
+                "status": 3,
+                "applicant_address": "0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79",
+                "email": "sdfsdfsdf@163.com",
+                "admin_address": "",
+                "note": "",
+                "cost_per_token": 1,
+                "time_start": 32344,
+                "time_end": 3434
+            }
+        ]
+    }
+}
+
+```
+
+
 ## 接口名称
 
 
@@ -527,6 +625,103 @@ http://47.241.127.229:3000/api/win/?signature=0x2efecd7f36034ccb70708a7f899bcc36
 
 
 
+根据winId获取NFT Win申请信息
+
+
+
+### 接口描述
+
+
+
+- 根据winId获取NFT Win申请信息
+
+
+
+### 请求地址
+
+
+
+http://47.241.127.229:3000/api/win/winId
+
+
+### 请求方式
+
+
+
+**GET**
+
+
+
+### 请求参数
+
+
+
+#### Header 参数
+
+
+
+| **参数名** | **必选** | **类型**** / ****参数值** | **说明** |
+| --- | --- | --- | --- |
+|||||||
+
+
+
+#### query参数
+
+
+
+| **参数名** | **必选** | **类型** | **限制条件** | **说明** |
+| --- | --- | --- | --- | --- |
+|||||||
+
+
+### 需要调用到的其他接口:
+
+
+
+| **接口名称** | **接口地址** | **用途说明** |
+| --- | --- | --- |
+|||||
+
+​
+
+
+
+### 返回示例
+
+```json
+
+{
+    "response": {
+        "status": 200,
+        "charset": "UTF-8",
+        "respond_time": "2021-09-25 08:55:48",
+        "result": [
+            {
+                "id": 6,
+                "nft_name": "NFT 1",
+                "nft_description": "test",
+                "pool_name": "KDP1",
+                "nft_icon": "1.png",
+                "total_num_of_mint": 12,
+                "time_start": 3434,
+                "time_end": 32344,
+                "cost_per_nft": 1,
+                "nft_address": null,
+                "status": 2,
+                "applicant_address": "0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79"
+            }
+        ]
+    }
+}
+
+```
+
+
+## 接口名称
+
+
+
 提交NFT Win申请
 
 
@@ -642,7 +837,7 @@ http://47.241.127.229:3000/api/win/?signature=0x2efecd7f36034ccb70708a7f899bcc36
 
 
 
-47.241.127.229:3000/api/win/win_nft_id
+47.241.127.229:3000/api/win/winId
 
 
 
@@ -735,7 +930,7 @@ http://47.241.127.229:3000/api/win/?signature=0x2efecd7f36034ccb70708a7f899bcc36
 
 
 
-47.241.127.229:3000/api/win/audit/win_nft_id
+47.241.127.229:3000/api/win/audit/winId
 
 
 
