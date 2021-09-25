@@ -24,7 +24,7 @@ async function signMessage(message, prikey) {
 
 async function veirySignature(address, message, signature) {
     const signaddr = await web3.eth.accounts.recover(message, signature);
-    return address == signaddr;
+    return (address == signaddr);
 }
 // (async () => {
 //     const sig = await signMessage('hello', address);
