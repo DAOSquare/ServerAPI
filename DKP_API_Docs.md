@@ -272,7 +272,7 @@ http://47.241.127.229:3000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bc
 | --- | --- | --- | --- | --- |
 | **pooldesc** | **是** | **String** |**无**|**池子的描述** |
 | **poolIcon** | **是** | **String** | **无**| **池子的图标 url** |
-| **admin_address** | **是** | **String** | | **pool 管理员地址** |
+| **admin_address** | **是** | **String** |**无** | **pool 管理员地址** |
 | **tokenIcon** | **是** | **String** |**无** | **token 图标的 url** |
 | **email** | **是** | **String** |**无**| **接收通知邮件地址** |
 | **token_name** | **是** | **String** |**无**| **token  的名称。** |
