@@ -25,7 +25,7 @@ DKPool申请列表
 ### 请求地址
 
 
-http://47.241.127.229:3000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bcc36010bbdacd23278002f6b4bbfcdec75e90de5d6d06963d5ecc319ebdcb531aff06790079dc07c78f9782c8020bbd5abb01b&walletAddress=0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79&message=Hello%20world
+http://47.241.127.229:5000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bcc36010bbdacd23278002f6b4bbfcdec75e90de5d6d06963d5ecc319ebdcb531aff06790079dc07c78f9782c8020bbd5abb01b&walletAddress=0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79&message=Hello%20world
 
 
 ### 请求方式
@@ -137,7 +137,7 @@ http://47.241.127.229:3000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bc
 ### 请求地址
 
 
-http://47.241.127.229:3000/api/dkpool/poolId
+http://47.241.127.229:5000/api/dkpool/poolId
 
 
 ### 请求方式
@@ -235,7 +235,7 @@ http://47.241.127.229:3000/api/dkpool/poolId
 
 
 
-47.241.127.229:3000/api/dkpool/new_dkpool
+47.241.127.229:5000/api/dkpool/new_dkpool
 
 
 
@@ -336,7 +336,7 @@ http://47.241.127.229:3000/api/dkpool/poolId
 
 
 
-47.241.127.229:3000/api/dkpool/poolid
+47.241.127.229:5000/api/dkpool/poolid
 
 
 
@@ -433,7 +433,7 @@ http://47.241.127.229:3000/api/dkpool/poolId
 
 
 
-47.241.127.229:3000/api/dkpool/audit/poolid
+47.241.127.229:5000/api/dkpool/audit/poolid
 
 
 
@@ -528,7 +528,7 @@ NFT Win申请列表
 
 
 
-http://47.241.127.229:3000/api/win/?signature=0x2efecd7f36034ccb70708a7f899bcc36010bbdacd23278002f6b4bbfcdec75e90de5d6d06963d5ecc319ebdcb531aff06790079dc07c78f9782c8020bbd5abb01b&walletAddress=0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79&message=Hello%20world
+http://47.241.127.229:5000/api/win/?signature=0x2efecd7f36034ccb70708a7f899bcc36010bbdacd23278002f6b4bbfcdec75e90de5d6d06963d5ecc319ebdcb531aff06790079dc07c78f9782c8020bbd5abb01b&walletAddress=0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79&message=Hello%20world
 
 
 ### 请求方式
@@ -647,7 +647,7 @@ http://47.241.127.229:3000/api/win/?signature=0x2efecd7f36034ccb70708a7f899bcc36
 
 
 
-http://47.241.127.229:3000/api/win/winId
+http://47.241.127.229:5000/api/win/winId
 
 
 ### 请求方式
@@ -764,7 +764,7 @@ http://47.241.127.229:3000/api/win/winId
 
 
 
-47.241.127.229:3000/api/win/new_win
+47.241.127.229:5000/api/win/new_win
 
 
 
@@ -863,7 +863,7 @@ http://47.241.127.229:3000/api/win/winId
 
 
 
-47.241.127.229:3000/api/win/winId
+47.241.127.229:5000/api/win/winId
 
 
 
@@ -956,7 +956,7 @@ http://47.241.127.229:3000/api/win/winId
 
 
 
-47.241.127.229:3000/api/win/audit/winId
+47.241.127.229:5000/api/win/audit/winId
 
 
 
