@@ -582,39 +582,45 @@ http://47.241.127.229:3000/api/win/?signature=0x2efecd7f36034ccb70708a7f899bcc36
 ```json
 
 {
-	"response": {
-		"status": 200,
-		"charset": "UTF-8",
-		"respond_time": "2021-09-15 08:54:29",
-		"result": [
-			{
-				"id": 3,
-				"nft_name": "test",
-				"nft_description": "test",
-				"pool_name": "DKP1",
-				"nft_icon": ,
-				"total_num_of_mint": 100000,
-				"timeStart": 342342,
-				"timeEnd": 243432,
-				"cost_per_nft": 9.2,
-				"nft_address": "342353464",
-				"status": null,
-				"applicantAddress": null
-			},
-			{
-				"id": 3,
-				"nft_name": "test",
-				"nft_description": "test",
-				"pool_name": "DKP1",
-				"nft_icon": ,
-				"total_num_of_mint": 100000,
-				"timeStart": 342342,
-				"timeEnd": 243432,
-				"cost_per_nft": 9.2,
-				"nft_address": "342353464",
-				"status": null,
-				"applicantAddress": null
-			}
+    "response": {
+        "status": 200,
+        "charset": "UTF-8",
+        "respond_time": "2021-09-27 07:31:58",
+        "result": [
+            {
+                "id": 56,
+                "nft_name": "NFT TEST002",
+                "nft_description": "test",
+                "pool_name": "KDP0003",
+                "nft_icon": "2.png",
+                "total_num_of_mint": 10,
+                "time_start": 123,
+                "time_end": 1234,
+                "cost_per_nft": null,
+                "nft_address": null,
+                "status": 1,
+                "applicant_address": "0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79",
+                "win_cost_per_nft": 1,
+                "win_pool_name": "DKP2",
+                "win_nft_id": 56
+            },
+            {
+                "id": 56,
+                "nft_name": "NFT TEST002",
+                "nft_description": "test",
+                "pool_name": "KDP0003",
+                "nft_icon": "2.png",
+                "total_num_of_mint": 10,
+                "time_start": 123,
+                "time_end": 1234,
+                "cost_per_nft": null,
+                "nft_address": null,
+                "status": 1,
+                "applicant_address": "0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79",
+                "win_cost_per_nft": 1,
+                "win_pool_name": "DKP2",
+                "win_nft_id": 56
+            }
 		]
 	}
 }
@@ -695,21 +701,41 @@ http://47.241.127.229:3000/api/win/winId
     "response": {
         "status": 200,
         "charset": "UTF-8",
-        "respond_time": "2021-09-25 08:55:48",
+        "respond_time": "2021-09-27 07:36:46",
         "result": [
             {
-                "id": 6,
-                "nft_name": "NFT 1",
+                "id": 64,
+                "nft_name": "NFT TEST002",
                 "nft_description": "test",
-                "pool_name": "KDP1",
-                "nft_icon": "1.png",
-                "total_num_of_mint": 12,
-                "time_start": 3434,
-                "time_end": 32344,
-                "cost_per_nft": 1,
+                "pool_name": "KDP0003",
+                "nft_icon": "2.png",
+                "total_num_of_mint": 10,
+                "time_start": 123,
+                "time_end": 1234,
+                "cost_per_nft": null,
                 "nft_address": null,
-                "status": 2,
-                "applicant_address": "0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79"
+                "status": 1,
+                "applicant_address": "0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79",
+                "win_cost_per_nft": 1.2,
+                "win_pool_name": "DKP21",
+                "win_nft_id": 64
+            },
+            {
+                "id": 64,
+                "nft_name": "NFT TEST002",
+                "nft_description": "test",
+                "pool_name": "KDP0003",
+                "nft_icon": "2.png",
+                "total_num_of_mint": 10,
+                "time_start": 123,
+                "time_end": 1234,
+                "cost_per_nft": null,
+                "nft_address": null,
+                "status": 1,
+                "applicant_address": "0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79",
+                "win_cost_per_nft": 1.1,
+                "win_pool_name": "DKP22",
+                "win_nft_id": 64
             }
         ]
     }
@@ -776,7 +802,7 @@ http://47.241.127.229:3000/api/win/winId
 | **total_num_of_mint** | **是** | **int** | **无** | **总铸造量** |
 | **time_start** | **是** | **int** |**无** | **开始兑换的时间 ( 时间戳 )** |
 | **time_end** | **是** | **int** |**无**   | **结束兑换的时间 ( 时间戳 )** |
-| **cost_per_nft** | **是** | **Float** | **无** | **每个 NFT 消耗 DKP 数量** |
+| **cost_per_nft** | **是** | **二维数组** | **无** | **每个 NFT 消耗 DKP 数量， eg. [[1.2,"DKP21"],[1.1,"DKP22"]]** |
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
 | **walletAddress** | **是** | **String** | **无** | **用户地址** |
 | **message** | **是** | **String** | **无** | **签名内容** |
