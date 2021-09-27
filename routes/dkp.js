@@ -128,7 +128,7 @@ router.post('/new_dkpool', async (req, res) => {
                     "charset": "UTF-8", //定义返回内容的编码
                     "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
                     "result": { //返回的结果
-                        "error message": "Only supports letters and numbers",
+                        "error message": "pool_name  && pool_desc Only supports letters and numbers",
                     }
                 }
             });
@@ -185,8 +185,20 @@ router.put('/:poolId', async (req, res) => {
             });
             return;
         }
-
-        const verifyResult = await veirySignature(formData.admin_address, formData.message, formData.signature);
+        if (!checkName(formData.pool_desc)) {
+            res.json({
+                "response": {
+                    "status": 400, //或其他状态码
+                    "charset": "UTF-8", //定义返回内容的编码
+                    "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
+                    "result": { //返回的结果
+                        "error message": "pool_desc Only supports letters and numbers",
+                    }
+                }
+            });
+            return;
+        }
+        const verifyResult = await veirySignature(formData.walletAddress, formData.message, formData.signature);
         if (!verifyResult) {
             res.json({
                 "response": {
@@ -287,7 +299,7 @@ router.put('/audit/:poolId', async (req, res) => {
             });
             return;
         }
-        const verifyResult = await veirySignature(formData.admin_address, formData.message, formData.signature);
+        const verifyResult = await veirySignature(formData.walletAddress, formData.message, formData.signature);
         if (!verifyResult) {
             res.json({
                 "response": {

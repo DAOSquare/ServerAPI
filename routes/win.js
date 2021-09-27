@@ -1,5 +1,6 @@
 const express = require("express");
 const Win = require('../controllers/win_management');
+const NFTCost = require('../controllers/nft_cost_dkp_management');
 const sd = require('silly-datetime');
 const { getSignedAddressFromSignedTx, veirySignature } = require('../utils/recoverTx');
 const { checkName, checkIfInteger } = require('../utils/utils');
@@ -85,7 +86,8 @@ router.get('/:winId', async (req, res) => {
 //Create a win.
 router.post('/new_win', async (req, res) => {
     let formData = req.body;
-    console.log(formData);
+    console.log(formData.cost_per_nft)
+    const costNFTList = JSON.parse(formData.cost_per_nft);
     if (formData.nft_name == null || formData.nft_name.length == 0 ||
         formData.nft_description == null || formData.nft_description.length == 0 ||
         formData.pool_name == null || formData.pool_name.length == 0 ||
@@ -96,14 +98,16 @@ router.post('/new_win', async (req, res) => {
         formData.cost_per_nft == null || formData.cost_per_nft == '' ||
         formData.walletAddress == null || formData.walletAddress.length == 0 ||
         formData.signature == null || formData.signature.length == 0 ||
-        formData.message == null || formData.message.length == 0) {
+        formData.message == null || formData.message.length == 0 ||
+        costNFTList.length > 4 || costNFTList.length == 0
+    ) {
         res.json({
             "response": {
                 "status": 400, //或其他状态码
                 "charset": "UTF-8", //定义返回内容的编码
                 "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
                 "result": { //返回的结果
-                    "error message": "Form Data Null Error",
+                    "error message": "Form Data Error",
                 }
             }
         });
@@ -122,8 +126,10 @@ router.post('/new_win', async (req, res) => {
             });
             return;
         }
-        await new Win().createWin(formData, (queryResult) => {
+        await new Win().createWin(formData, costNFTList, (queryResult) => {
+            console.log(queryResult);
             if (queryResult && queryResult.affectedRows > 0) {
+                // new NFTCost().create((queryResult) => { })
                 res.json({
                     "response": {
                         "status": 200, //或其他状态码
