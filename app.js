@@ -50,6 +50,6 @@ app.use(
 app.use('/', routes);
 
 
-app.listen(port, () => { // 监听3000端口
+app.listen(port, () => { // 监听5000端口
 	console.log('服务已启动 http://localhost:5000');
 })
