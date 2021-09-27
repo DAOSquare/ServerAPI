@@ -4,14 +4,14 @@
  Source Server         : VMware Ubuntu
  Source Server Type    : MySQL
  Source Server Version : 50733
- Source Host           : 192.168.32.204:3306
+ Source Host           : 192.168.32.208:3306
  Source Schema         : dkpool
 
  Target Server Type    : MySQL
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 25/09/2021 00:50:28
+ Date: 27/09/2021 22:55:43
 */
 
 SET NAMES utf8mb4;
@@ -27,6 +27,18 @@ CREATE TABLE `address_role`  (
   `role` int(8) NULL DEFAULT NULL COMMENT '用户角色 1 普通账户地址 2 管理员账户地址',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for nft_cost_dkps
+-- ----------------------------
+DROP TABLE IF EXISTS `nft_cost_dkps`;
+CREATE TABLE `nft_cost_dkps`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `win_nft_id` int(11) NULL DEFAULT NULL,
+  `cost_per_nft` float(11, 5) NULL DEFAULT NULL,
+  `pool_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for pool_Info
@@ -50,7 +62,7 @@ CREATE TABLE `pool_Info`  (
   `time_start` int(11) NULL DEFAULT NULL,
   `time_end` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for win_Info
@@ -65,11 +77,10 @@ CREATE TABLE `win_Info`  (
   `total_num_of_mint` int(255) NULL DEFAULT NULL COMMENT '总铸造量',
   `time_start` int(255) NULL DEFAULT NULL COMMENT '开始兑换的时间',
   `time_end` int(255) NULL DEFAULT NULL COMMENT '结束兑换的时间',
-  `cost_per_nft` float NULL DEFAULT NULL COMMENT '每个NFT消耗DKP数量',
   `nft_address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `status` int(2) NULL DEFAULT NULL COMMENT '状态：1 待审批 2 审批通过 3审批不通过',
   `applicant_address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '申请人地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 65 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 SET FOREIGN_KEY_CHECKS = 1;
