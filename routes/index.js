@@ -7,14 +7,15 @@
 const express = require('express');
 const dkpRouter = require('./dkp'); // 引入dkp路由模块
 const winRouter = require('./win'); // 引入win路由模块
-
+const userRouter = require('./user');// 引入user路由模块
 const { jwtAuth, decode } = require('../utils/user-signed'); // 引入jwt认证函数
 const router = express.Router(); // 注册路由 
 
 // router.use(decode); // 注入认证模块
 
 router.use('/api/dkpool', dkpRouter); // 注入dkp路由模块
-router.use('/api/win',winRouter)// 注入win路由模块
+router.use('/api/win', winRouter)// 注入win路由模块
+router.use('/api/user', userRouter); //注入user路由模块
 // 自定义统一异常处理中间件，需要放在代码最后
 router.use((err, req, res, next) => {
   // 自定义用户认证失败的错误返回
