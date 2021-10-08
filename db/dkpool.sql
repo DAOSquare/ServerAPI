@@ -4,14 +4,14 @@
  Source Server         : VMware Ubuntu
  Source Server Type    : MySQL
  Source Server Version : 50733
- Source Host           : 192.168.32.208:3306
+ Source Host           : 192.168.32.214:3306
  Source Schema         : dkpool
 
  Target Server Type    : MySQL
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 27/09/2021 22:55:43
+ Date: 09/10/2021 01:22:08
 */
 
 SET NAMES utf8mb4;
@@ -26,7 +26,7 @@ CREATE TABLE `address_role`  (
   `address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '账户地址',
   `role` int(8) NULL DEFAULT NULL COMMENT '用户角色 1 普通账户地址 2 管理员账户地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for nft_cost_dkps
@@ -63,6 +63,17 @@ CREATE TABLE `pool_Info`  (
   `time_end` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for user_login_info
+-- ----------------------------
+DROP TABLE IF EXISTS `user_login_info`;
+CREATE TABLE `user_login_info`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '钱包地址',
+  `last_login_time` int(11) NULL DEFAULT NULL COMMENT '用户上一次登录时间（timestamp)',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for win_Info
