@@ -579,7 +579,7 @@ http://47.241.127.229:5000/api/dkpool/poolId
 
 
 
-47.241.127.229:5000/api/dkpool/new_dkpool
+http://47.241.127.229:5000/api/dkpool/new_dkpool
 
 
 
@@ -680,7 +680,7 @@ http://47.241.127.229:5000/api/dkpool/poolId
 
 
 
-47.241.127.229:5000/api/dkpool/poolid
+http://47.241.127.229:5000/api/dkpool/poolid
 
 
 
@@ -777,7 +777,7 @@ http://47.241.127.229:5000/api/dkpool/poolId
 
 
 
-47.241.127.229:5000/api/dkpool/audit/poolid
+http://47.241.127.229:5000/api/dkpool/audit/poolid
 
 
 
@@ -1108,7 +1108,7 @@ http://47.241.127.229:5000/api/win/winId
 
 
 
-47.241.127.229:5000/api/win/new_win
+http://47.241.127.229:5000/api/win/new_win
 
 
 
@@ -1207,7 +1207,7 @@ http://47.241.127.229:5000/api/win/winId
 
 
 
-47.241.127.229:5000/api/win/winId
+http://47.241.127.229:5000/api/win/winId
 
 
 
