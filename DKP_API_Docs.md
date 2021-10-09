@@ -619,8 +619,8 @@ http://47.241.127.229:5000/api/dkpool/poolId
 | **tokenIcon** | **是** | **String** |**无**| **token 图标的 url** |
 | **token_address** | **是** | **String** |**无**| **与池子质押捐赠接受的 token 地址。** |
 | **email** | **是** | **String** |**无**|**接收通知邮件地址** |
-| **time_start** | **是** | **String** |**无**| **开始时间，timestamp时间戳格式** |
-| **time_end** | **是** | **String** |**无**| **结束时间，timestamp时间戳格式** |
+| **time_start** | **是** | **int** |**无**| **开始时间，timestamp时间戳格式** |
+| **time_end** | **是** | **int** |**无**| **结束时间，timestamp时间戳格式** |
 | **walletAddress** | **是** | **String** |**无**| **用户地址** |
 | **signature** | **是** | **String** |**无**| **用户签名信息** |
 | **message** | **是** | **String** |**无**| **签名内容** |
