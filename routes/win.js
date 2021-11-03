@@ -92,10 +92,10 @@ router.post('/new_win', async (req, res) => {
         formData.nft_description == null || formData.nft_description.length == 0 ||
         formData.pool_name == null || formData.pool_name.length == 0 ||
         formData.nft_icon == null || formData.nft_icon.length == 0 ||
+        formData.cost_per_nft == null || formData.cost_per_nft == '' ||
         formData.total_num_of_mint == null || formData.total_num_of_mint == '' ||
         formData.time_start == null || formData.time_start.length == '' ||
         formData.time_end == null || formData.time_end == '' ||
-        formData.cost_per_nft == null || formData.cost_per_nft == '' ||
         formData.walletAddress == null || formData.walletAddress.length == 0 ||
         formData.signature == null || formData.signature.length == 0 ||
         formData.message == null || formData.message.length == 0 ||

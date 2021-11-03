@@ -85,15 +85,19 @@ router.post('/new_dkpool', async (req, res) => {
         formData.pool_desc == null || formData.pool_desc == '' ||
         formData.poolIcon == null || formData.poolIcon == '' ||
         formData.type == null || formData.type == '' ||
+        formData.cost_per_token == null || formData.cost_per_token == '' ||
+        formData.token_address == null || formData.token_address == '' ||
         formData.token_name == null || formData.token_name == '' ||
         formData.tokenIcon == null || formData.tokenIcon == '' ||
-        formData.token_address == null || formData.token_address == '' ||
+        formData.time_start == null || formData.time_start == '' ||
+        formData.time_end == null || formData.time_end == '' ||
+        formData.admin_address == null || formData.admin_address == '' ||
+        // formData.note == null || formData.note == '' ||
         formData.email == null || formData.email == '' ||
         formData.walletAddress == null || formData.walletAddress == '' ||
         formData.signature == null || formData.signature == '' ||
-        formData.message == null || formData.message == '' ||
-        formData.time_start == null || formData.time_start == '' ||
-        formData.time_end == null || formData.time_end == '') {
+        formData.message == null || formData.message == ''
+    ) {
         res.json({
             "response": {
                 "status": 400, //或其他状态码
