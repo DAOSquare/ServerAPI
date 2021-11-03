@@ -615,12 +615,16 @@ http://47.241.127.229:5000/api/dkpool/new_dkpool
 | **pool_desc** | **是** | **String** | **无** | **池子的描述** |
 | **poolIcon** | **是** | **String** | **无** | **池子的图标 url** |
 | **type** | **是** | **Int** |**无**| **指定池子的类型。 (1. donate:  捐赠池  2.Task 质押池3 Mission)** |
+| **cost_per_token** | **是** | **Int** |**无**| **消耗DKP数量** |
+| **token_address** | **是** | **String** |**无**| **与池子质押捐赠接受的 token 地址。** |
 | **token_name** | **是** | **String** |**无** |**token 的名称。** |
 | **tokenIcon** | **是** | **String** |**无**| **token 图标的 url** |
-| **token_address** | **是** | **String** |**无**| **与池子质押捐赠接受的 token 地址。** |
-| **email** | **是** | **String** |**无**|**接收通知邮件地址** |
 | **time_start** | **是** | **int** |**无**| **开始时间，timestamp时间戳格式** |
 | **time_end** | **是** | **int** |**无**| **结束时间，timestamp时间戳格式** |
+| **admin_address** | **是** | **String** |**无**| **管理员地址** |
+| **admin_address** | **是** | **String** |**无**| **管理员地址** |
+| **email** | **是** | **String** |**无**|**接收通知邮件地址** |
+| **note** | **否** | **String** |**无**|**池子说明** |
 | **walletAddress** | **是** | **String** |**无**| **用户地址** |
 | **signature** | **是** | **String** |**无**| **用户签名信息** |
 | **message** | **是** | **String** |**无**| **签名内容** |
@@ -715,9 +719,9 @@ http://47.241.127.229:5000/api/dkpool/poolid
 | **pooldesc** | **是** | **String** |**无**|**池子的描述** |
 | **poolIcon** | **是** | **String** | **无**| **池子的图标 url** |
 | **admin_address** | **是** | **String** |**无** | **pool 管理员地址** |
+| **token_name** | **是** | **String** |**无**| **token  的名称。** |
 | **tokenIcon** | **是** | **String** |**无** | **token 图标的 url** |
 | **email** | **是** | **String** |**无**| **接收通知邮件地址** |
-| **token_name** | **是** | **String** |**无**| **token  的名称。** |
 | **walletAddress** | **是** | **String** |**无**| **用户地址**|
 | **signature** | **是** | **String** |**无**| **用户签名信息**|
 | **message** | **是** | **String** |**无**| **签名内容**|
@@ -1139,14 +1143,14 @@ http://47.241.127.229:5000/api/win/new_win
 
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
 | --- | --- | --- | --- | --- |
+| **pool_name** | **是** | **String** |**无** | **在哪个 POOL 下创建 NFT** |
 | **nft_name** | **是** | **String** | **无** | **要创建 NFT 的名字** |
 | **nft_description** | **是** | **String** | **无** | **这个 NFT 的描述** |
-| **pool_name** | **是** | **String** |**无** | **在哪个 POOL 下创建 NFT** |
 | **nft_icon** | **是** | **String** | **无** | **nft 的资源素材** |
+| **cost_per_nft** | **是** | **二维数组** | **无** | **每个 NFT 消耗 DKP 数量， eg. [[1.2,"DKP21"],[1.1,"DKP22"]]** |
 | **total_num_of_mint** | **是** | **int** | **无** | **总铸造量** |
 | **time_start** | **是** | **int** |**无** | **开始兑换的时间 ( 时间戳 )** |
 | **time_end** | **是** | **int** |**无**   | **结束兑换的时间 ( 时间戳 )** |
-| **cost_per_nft** | **是** | **二维数组** | **无** | **每个 NFT 消耗 DKP 数量， eg. [[1.2,"DKP21"],[1.1,"DKP22"]]** |
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
 | **walletAddress** | **是** | **String** | **无** | **用户地址** |
 | **message** | **是** | **String** | **无** | **签名内容** |
