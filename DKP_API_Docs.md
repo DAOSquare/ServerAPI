@@ -622,7 +622,6 @@ http://47.241.127.229:5000/api/dkpool/new_dkpool
 | **time_start** | **是** | **int** |**无**| **开始时间，timestamp时间戳格式** |
 | **time_end** | **是** | **int** |**无**| **结束时间，timestamp时间戳格式** |
 | **admin_address** | **是** | **String** |**无**| **管理员地址** |
-| **admin_address** | **是** | **String** |**无**| **管理员地址** |
 | **email** | **是** | **String** |**无**|**接收通知邮件地址** |
 | **note** | **否** | **String** |**无**|**池子说明** |
 | **walletAddress** | **是** | **String** |**无**| **用户地址** |
