@@ -428,10 +428,10 @@ http://47.241.127.229:5000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bc
 				"id": 17,
 				"poolname": "DKP1",
 				"pooldesc": "test",
-				"poolIcon": "fsdfsdfsdfsdfsdf",
+				"pool_icon": "fsdfsdfsdfsdfsdf",
 				"type": 1,
 				"tokenName": "token1",
-				"tokenIcon": "sdfsdfdf",
+				"token_icon": "sdfsdfdf",
 				"tokenAddres":,
 				"status": null,
 				"applicantAddress": null,
@@ -442,10 +442,10 @@ http://47.241.127.229:5000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bc
 				"id": 17,
 				"poolname": "DKP1",
 				"pooldesc": "test",
-				"poolIcon": "fsdfsdfsdfsdfsdf",
+				"pool_icon": "fsdfsdfsdfsdfsdf",
 				"type": 1,
 				"tokenName": "token1",
-				"tokenIcon": "sdfsdfdf",
+				"token_icon": "sdfsdfdf",
 				"tokenAddres":,
 				"status": null,
 				"applicantAddress": null,
@@ -538,10 +538,10 @@ http://47.241.127.229:5000/api/dkpool/poolId
                 "id": 30,
                 "pool_name": "ff1ff3ffff",
                 "pool_desc": "test",
-                "poolIcon": "sdfsd",
+                "pool_icon": "sdfsd",
                 "type": 1,
                 "token_name": "TEST_TOKEN",
-                "tokenIcon": "232342",
+                "token_icon": "232342",
                 "token_address": "sdfsdf",
                 "status": 3,
                 "applicant_address": "0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79",
@@ -613,14 +613,14 @@ http://47.241.127.229:5000/api/dkpool/new_dkpool
 | ------------ | --------- | --------- | ------------- | --------- |
 | **pool_name** | **是** | **String** | **无** | **池子的名称** |
 | **pool_desc** | **是** | **String** | **无** | **池子的描述** |
-| **poolIcon** | **是** | **String** | **无** | **池子的图标 url** |
+| **pool_icon** | **是** | **String** | **无** | **池子的图标 url** |
 | **type** | **是** | **Int** |**无**| **指定池子的类型。 (1. donate:  捐赠池  2.Task 质押池3 Mission)** |
 | **cost_per_token** | **是** | **Int** |**无**| **消耗DKP数量** |
 | **token_address** | **是** | **String** |**无**| **与池子质押捐赠接受的 token 地址。** |
 | **token_name** | **是** | **String** |**无** |**token 的名称。** |
-| **tokenIcon** | **是** | **String** |**无**| **token 图标的 url** |
+| **token_icon** | **是** | **String** |**无**| **token 图标的 url** |
 | **time_start** | **是** | **int** |**无**| **开始时间，timestamp时间戳格式** |
-| **time_end** | **是** | **int** |**无**| **结束时间，timestamp时间戳格式** |
+| **time_end** | **否** | **int** |**无**| **结束时间，timestamp时间戳格式** |
 | **admin_address** | **是** | **String** |**无**| **管理员地址** |
 | **email** | **是** | **String** |**无**|**接收通知邮件地址** |
 | **note** | **否** | **String** |**无**|**池子说明** |
@@ -716,10 +716,10 @@ http://47.241.127.229:5000/api/dkpool/poolid
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
 | --- | --- | --- | --- | --- |
 | **pooldesc** | **是** | **String** |**无**|**池子的描述** |
-| **poolIcon** | **是** | **String** | **无**| **池子的图标 url** |
+| **pool_icon** | **是** | **String** | **无**| **池子的图标 url** |
 | **admin_address** | **是** | **String** |**无** | **pool 管理员地址** |
 | **token_name** | **是** | **String** |**无**| **token  的名称。** |
-| **tokenIcon** | **是** | **String** |**无** | **token 图标的 url** |
+| **token_icon** | **是** | **String** |**无** | **token 图标的 url** |
 | **email** | **是** | **String** |**无**| **接收通知邮件地址** |
 | **walletAddress** | **是** | **String** |**无**| **用户地址**|
 | **signature** | **是** | **String** |**无**| **用户签名信息**|
@@ -932,44 +932,35 @@ http://47.241.127.229:5000/api/win/?signature=0x2efecd7f36034ccb70708a7f899bcc36
     "response": {
         "status": 200,
         "charset": "UTF-8",
-        "respond_time": "2021-09-27 07:31:58",
+        "respond_time": "2021-11-21 12:51:32",
         "result": [
             {
-                "id": 56,
-                "nft_name": "NFT TEST002",
-                "nft_description": "test",
-                "pool_name": "KDP0003",
-                "nft_icon": "2.png",
-                "total_num_of_mint": 10,
-                "time_start": 123,
-                "time_end": 1234,
-                "cost_per_nft": null,
+                "id": 1,
+                "nft_name": "NFT001",
+                "nft_description": "NFT001",
+                "pool_name": "test",
+                "nft_icon": "1.png",
+                "total_num_of_mint": 100,
+                "time_start": 123123,
+                "time_end": 123123123,
                 "nft_address": null,
                 "status": 1,
-                "applicant_address": "0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79",
-                "win_cost_per_nft": 1,
-                "win_pool_name": "DKP2",
-                "win_nft_id": 56
-            },
-            {
-                "id": 56,
-                "nft_name": "NFT TEST002",
-                "nft_description": "test",
-                "pool_name": "KDP0003",
-                "nft_icon": "2.png",
-                "total_num_of_mint": 10,
-                "time_start": 123,
-                "time_end": 1234,
-                "cost_per_nft": null,
-                "nft_address": null,
-                "status": 1,
-                "applicant_address": "0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79",
-                "win_cost_per_nft": 1,
-                "win_pool_name": "DKP2",
-                "win_nft_id": 56
+                "applicant_address": "0x4234cde2E0Aa6BFD5D9cb0c9fF220224cC1568FE",
+                "cost_per_nfts": [
+                    {
+                        "win_cost_per_nft": 1.2,
+                        "win_pool_name": "DKP21",
+                        "win_nft_id": 1
+                    },
+                    {
+                        "win_cost_per_nft": 1.1,
+                        "win_pool_name": "DKP22",
+                        "win_nft_id": 1
+                    }
+                ]
             }
-		]
-	}
+        ]
+    }
 }
 
 ```
@@ -1048,41 +1039,32 @@ http://47.241.127.229:5000/api/win/winId
     "response": {
         "status": 200,
         "charset": "UTF-8",
-        "respond_time": "2021-09-27 07:36:46",
+        "respond_time": "2021-11-21 12:58:48",
         "result": [
             {
-                "id": 64,
-                "nft_name": "NFT TEST002",
-                "nft_description": "test",
-                "pool_name": "KDP0003",
-                "nft_icon": "2.png",
-                "total_num_of_mint": 10,
-                "time_start": 123,
-                "time_end": 1234,
-                "cost_per_nft": null,
+                "id": 2,
+                "nft_name": "NFT001",
+                "nft_description": "NFT001",
+                "pool_name": "test",
+                "nft_icon": "1.png",
+                "total_num_of_mint": 100,
+                "time_start": 123123,
+                "time_end": 123123123,
                 "nft_address": null,
                 "status": 1,
-                "applicant_address": "0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79",
-                "win_cost_per_nft": 1.2,
-                "win_pool_name": "DKP21",
-                "win_nft_id": 64
-            },
-            {
-                "id": 64,
-                "nft_name": "NFT TEST002",
-                "nft_description": "test",
-                "pool_name": "KDP0003",
-                "nft_icon": "2.png",
-                "total_num_of_mint": 10,
-                "time_start": 123,
-                "time_end": 1234,
-                "cost_per_nft": null,
-                "nft_address": null,
-                "status": 1,
-                "applicant_address": "0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79",
-                "win_cost_per_nft": 1.1,
-                "win_pool_name": "DKP22",
-                "win_nft_id": 64
+                "applicant_address": "0x4234cde2E0Aa6BFD5D9cb0c9fF220224cC1568FE",
+                "cost_per_nfts": [
+                    {
+                        "win_cost_per_nft": 1.2,
+                        "win_pool_name": "DKP21",
+                        "win_nft_id": 2
+                    },
+                    {
+                        "win_cost_per_nft": 1.1,
+                        "win_pool_name": "DKP22",
+                        "win_nft_id": 2
+                    }
+                ]
             }
         ]
     }
