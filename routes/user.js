@@ -6,10 +6,10 @@ const { veirySignature } = require('../utils/recoverTx');
 const { checkName, checkIfInteger, verifyAddress } = require('../utils/utils');
 const router = express.Router();
 
-//Get userInfo by walletAddress.
-router.get('/user_info/:walletAddress', async (req, res) => {
-    if (req.params.walletAddress && verifyAddress(req.params.walletAddress)) {
-        let rel = await new UserInfo().getUserInfoByAddress(req.params.walletAddress, (queryResult) => {
+//Get userInfo by wallet_address.
+router.get('/user_info/:wallet_address', async (req, res) => {
+    if (req.params.wallet_address && verifyAddress(req.params.wallet_address)) {
+        let rel = await new UserInfo().getUserInfoByAddress(req.params.wallet_address, (queryResult) => {
             res.json({
                 "response": {
                     "status": 200, //或其他状态码
@@ -34,10 +34,10 @@ router.get('/user_info/:walletAddress', async (req, res) => {
     }
 });
 
-//Get userInfo by walletAddress.
-router.get('/user_login_info/:walletAddress', async (req, res) => {
-    if (req.params.walletAddress && verifyAddress(req.params.walletAddress)) {
-        let rel = await new UserLoginInfo().getUserLoginInfoByAddress(req.params.walletAddress, (queryResult) => {
+//Get userInfo by wallet_address.
+router.get('/user_login_info/:wallet_address', async (req, res) => {
+    if (req.params.wallet_address && verifyAddress(req.params.wallet_address)) {
+        let rel = await new UserLoginInfo().getUserLoginInfoByAddress(req.params.wallet_address, (queryResult) => {
             res.json({
                 "response": {
                     "status": 200, //或其他状态码
@@ -64,7 +64,7 @@ router.get('/user_login_info/:walletAddress', async (req, res) => {
 //register new wallet address.
 router.post('/regiser', async (req, res) => {
     let formData = req.body;
-    if (formData.walletAddress == null || formData.walletAddress == '' ||
+    if (formData.wallet_address == null || formData.wallet_address == '' ||
         formData.role == null || formData.pool_desc == '' ||
         formData.signature == null || formData.signature == '' ||
         formData.message == null || formData.message == ''
@@ -82,7 +82,7 @@ router.post('/regiser', async (req, res) => {
         return;
     }
     else {
-        const verifyResult = await veirySignature(formData.walletAddress, formData.message, formData.signature);
+        const verifyResult = await veirySignature(formData.wallet_address, formData.message, formData.signature);
         if (!verifyResult) {
             res.json({
                 "response": {
@@ -130,7 +130,7 @@ router.post('/regiser', async (req, res) => {
 //record login info.
 router.post('/login', async (req, res) => {
     let formData = req.body;
-    if (formData.walletAddress == null || formData.walletAddress == '' ||
+    if (formData.wallet_address == null || formData.wallet_address == '' ||
         formData.signature == null || formData.signature == '' ||
         formData.message == null || formData.message == ''
     ) {
@@ -147,7 +147,7 @@ router.post('/login', async (req, res) => {
         return;
     }
     else {
-        const verifyResult = await veirySignature(formData.walletAddress, formData.message, formData.signature);
+        const verifyResult = await veirySignature(formData.wallet_address, formData.message, formData.signature);
         if (!verifyResult) {
             res.json({
                 "response": {

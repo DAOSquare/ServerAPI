@@ -7,7 +7,7 @@ class UserLoginInfo {
         let sql = `INSERT INTO user_login_info
      (address, last_login_time) VALUES(?,?)`;
         let todo = [
-            userLoginInfo.walletAddress == null ? "" : userLoginInfo.walletAddress,
+            userLoginInfo.wallet_address == null ? "" : userLoginInfo.wallet_address,
             Math.floor(Date.now() / 1000),
 
         ];

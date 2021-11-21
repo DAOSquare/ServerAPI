@@ -4,18 +4,82 @@ class Win {
     //get all Wins.
     async getWins(signAddr, callback) {
         // return results.rows;
+
         connectionPool.getConnection(function (err, connection) {
             if (err) throw err;
-            const querySQL = `SELECT win_Info.*, nft_cost_dkps.cost_per_nft as win_cost_per_nft, nft_cost_dkps.pool_name as win_pool_name,
-                            nft_cost_dkps.win_nft_id FROM win_Info LEFT JOIN nft_cost_dkps on nft_cost_dkps.win_nft_id=win_Info.id WHERE win_Info.applicant_address = ?`;
+            const checkAdminSQL = `SELECT * FROM address_role WHERE FIND_IN_SET(?,address)`;
             let data = [signAddr];
+            let costPerNFTArr = [];
 
             connection
-                .query(querySQL, data, (error, results, fields) => {
+                .query(checkAdminSQL, data, (error, results, fields) => {
                     if (error) throw error;
-                    // console.log(results)
-                    callback(results);
-                    connection.release();
+                    console.log('checkAdmin:', results.length);
+                    let querySQL = ``;
+                    if (results.length > 0) {//admin, return all entry
+                        querySQL = `SELECT * FROM win_Info`;
+                        connection
+                            .query(querySQL, (error, results1, fields1) => {
+                                if (error) throw error;
+                                console.log(results1)
+                                for (var i = 0; i < results1.length; i++) {
+                                    querySQL = `SELECT * FROM nft_cost_dkps WHERE win_nft_id = ?`;
+                                    // console.log(results1[i].id);
+                                    data = [results1[i].id];
+                                    connection
+                                        .query(querySQL, data, (error, results2, fields2) => {
+                                            if (error) throw error;
+                                            // console.log("results2:", results2);
+                                            for (var j = 0; j < results2.length; j++) {
+                                                costPerNFTArr.push({
+                                                    win_cost_per_nft: results2[j].cost_per_nft,
+                                                    win_pool_name: results2[j].pool_name,
+                                                    win_nft_id: results2[j].win_nft_id
+                                                });
+                                            }
+                                            console.log("costPerNFTArr: ", costPerNFTArr);
+                                            console.log("results1:", results1);
+                                            callback(results1);
+                                            connection.release();
+                                        });
+                                    results1[i].cost_per_nfts = costPerNFTArr;
+                                }
+
+                            });
+                    } else {
+                        // querySQL = `SELECT win_Info.*, nft_cost_dkps.cost_per_nft as win_cost_per_nft, nft_cost_dkps.pool_name as win_pool_name,
+                        // nft_cost_dkps.win_nft_id FROM win_Info 
+                        // LEFT JOIN nft_cost_dkps on nft_cost_dkps.win_nft_id=win_Info.id WHERE win_Info.applicant_address = ?`;
+                        querySQL = `SELECT * FROM win_Info WHERE applicant_address = ?`;
+                        connection
+                            .query(querySQL, data, (error, results1, fields1) => {
+                                if (error) throw error;
+                                console.log(results1)
+                                for (var i = 0; i < results1.length; i++) {
+                                    querySQL = `SELECT * FROM nft_cost_dkps WHERE win_nft_id = ?`;
+                                    // console.log(results1[i].id);
+                                    data = [results1[i].id];
+                                    connection
+                                        .query(querySQL, data, (error, results2, fields2) => {
+                                            if (error) throw error;
+                                            // console.log("results2:", results2);
+                                            for (var j = 0; j < results2.length; j++) {
+                                                costPerNFTArr.push({
+                                                    win_cost_per_nft: results2[j].cost_per_nft,
+                                                    win_pool_name: results2[j].pool_name,
+                                                    win_nft_id: results2[j].win_nft_id
+                                                });
+                                            }
+                                            console.log("costPerNFTArr: ", costPerNFTArr);
+                                            console.log("results1:", results1);
+                                            callback(results1);
+                                            connection.release();
+                                        });
+                                    results1[i].cost_per_nfts = costPerNFTArr;
+                                }
+
+                            });
+                    }
                 });
         });
     }
@@ -24,17 +88,38 @@ class Win {
         // return results.rows;
         connectionPool.getConnection(function (err, connection) {
             if (err) throw err;
-            const querySQL = `SELECT win_Info.*, nft_cost_dkps.cost_per_nft as win_cost_per_nft,
-                                nft_cost_dkps.pool_name as win_pool_name, nft_cost_dkps.win_nft_id FROM win_Info 
-                                LEFT JOIN nft_cost_dkps on nft_cost_dkps.win_nft_id=win_Info.id WHERE win_Info.id = ?`;
-            let data = [parseInt(winId)];
+            let querySQL = ``;
+            let costPerNFTArr = [];
 
+            let data = [parseInt(winId)];
+            querySQL = `SELECT * FROM win_Info WHERE id = ?`;
             connection
-                .query(querySQL, data, (error, results, fields) => {
+                .query(querySQL, data, (error, results1, fields1) => {
                     if (error) throw error;
-                    // console.log(results)
-                    callback(results);
-                    connection.release();
+                    console.log(results1)
+                    for (var i = 0; i < results1.length; i++) {
+                        querySQL = `SELECT * FROM nft_cost_dkps WHERE win_nft_id = ?`;
+                        // console.log(results1[i].id);
+                        data = [results1[i].id];
+                        connection
+                            .query(querySQL, data, (error, results2, fields2) => {
+                                if (error) throw error;
+                                // console.log("results2:", results2);
+                                for (var j = 0; j < results2.length; j++) {
+                                    costPerNFTArr.push({
+                                        win_cost_per_nft: results2[j].cost_per_nft,
+                                        win_pool_name: results2[j].pool_name,
+                                        win_nft_id: results2[j].win_nft_id
+                                    });
+                                }
+                                console.log("costPerNFTArr: ", costPerNFTArr);
+                                console.log("results1:", results1);
+                                callback(results1);
+                                connection.release();
+                            });
+                        results1[i].cost_per_nfts = costPerNFTArr;
+                    }
+
                 });
         });
     }
@@ -56,7 +141,7 @@ class Win {
             winInfo.time_start == null ? 0 : winInfo.time_start,
             winInfo.time_end == null ? 0 : winInfo.time_end,
             1,
-            winInfo.walletAddress == null ? "" : winInfo.walletAddress,
+            winInfo.wallet_address == null ? "" : winInfo.wallet_address,
 
         ];
         connectionPool.getConnection(function (err, connection) {

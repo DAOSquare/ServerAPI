@@ -6,39 +6,55 @@ class DKPool {
     // return results.rows;
     connectionPool.getConnection(function (err, connection) {
       if (err) throw err;
-      const querySQL = `SELECT * FROM pool_Info where applicant_address = ?`;
+      const checkAdminSQL = `SELECT * FROM address_role WHERE FIND_IN_SET(?,address)`;
       let data = [signAddr];
       connection
-        .query(querySQL, data, (error, results, fields) => {
+        .query(checkAdminSQL, data, (error, results, fields) => {
           if (error) throw error;
-          console.log(results)
-          callback(results);
-          connection.release();
+          console.log('checkAdmin:', results.length);
+          let querySQL = `SELECT * FROM pool_Info`;
+          if (results.length > 0) {//admin, return all entry
+            connection
+              .query(querySQL, (error, results, fields) => {
+                if (error) throw error;
+                console.log(results)
+                callback(results);
+                connection.release();
+              });
+          } else {
+            querySQL = `SELECT * FROM pool_Info where applicant_address = ?`;
+            connection
+              .query(querySQL, data, (error, results, fields) => {
+                if (error) throw error;
+                console.log(results)
+                callback(results);
+                connection.release();
+              });
+          }
         });
     });
   }
-
   //create a dkpool.
   async createDKPool(dkpInfo, callback) {
     // console.log('dkpInfo: ', dkpInfo);
-    console.log(dkpInfo.poolname, dkpInfo.pooldesc, dkpInfo.poolIcon, dkpInfo.type, dkpInfo.tokenName, dkpInfo.tokenIcon, dkpInfo.tokenAddress);
+    console.log(dkpInfo.poolname, dkpInfo.pooldesc, dkpInfo.pool_icon, dkpInfo.type, dkpInfo.tokenName, dkpInfo.token_icon, dkpInfo.tokenAddress);
     let stmt = `INSERT INTO pool_Info
-     (pool_name, pool_desc, poolIcon, 
-      type, token_name, tokenIcon, 
+     (pool_name, pool_desc, pool_icon, 
+      type, token_name, token_icon, 
       token_address, status, email, 
       applicant_address, admin_address, note, 
       cost_per_token, time_start, time_end) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
     let todo = [
       dkpInfo.pool_name == null ? "" : dkpInfo.pool_name,
       dkpInfo.pool_desc == null ? "" : dkpInfo.pool_desc,
-      dkpInfo.poolIcon == null ? "" : dkpInfo.poolIcon,
+      dkpInfo.pool_icon == null ? "" : dkpInfo.pool_icon,
       dkpInfo.type == null ? 1 : parseInt(dkpInfo.type),
       dkpInfo.token_name == null ? "" : dkpInfo.token_name,
-      dkpInfo.tokenIcon == null ? "" : dkpInfo.tokenIcon,
+      dkpInfo.token_icon == null ? "" : dkpInfo.token_icon,
       dkpInfo.token_address == null ? "" : dkpInfo.token_address,
       1,
       dkpInfo.email == null ? "" : dkpInfo.email,
-      dkpInfo.walletAddress == null ? "" : dkpInfo.walletAddress,
+      dkpInfo.wallet_address == null ? "" : dkpInfo.wallet_address,
       dkpInfo.admin_address == null ? "" : dkpInfo.admin_address,
       dkpInfo.note == null ? "" : dkpInfo.note,
       dkpInfo.cost_per_token == null ? 0 : parseInt(dkpInfo.cost_per_token),
@@ -76,18 +92,18 @@ class DKPool {
             let sql = `UPDATE pool_Info
             SET
             pool_desc = ?, 
-            poolIcon = ?,
+            pool_icon = ?,
             token_name = ?, 
-            tokenIcon = ?, 
+            token_icon = ?, 
             email = ?,
             admin_address = ?
             WHERE id = ?`;
 
             let data = [
               dkpInfo.pool_desc == null ? results[0].poolname : dkpInfo.pool_desc,
-              dkpInfo.poolIcon == null ? results[0].poolIcon : dkpInfo.poolIcon,
+              dkpInfo.pool_icon == null ? results[0].pool_icon : dkpInfo.pool_icon,
               dkpInfo.token_name == null ? results[0].token_name : dkpInfo.token_name,
-              dkpInfo.tokenIcon == null ? results[0].tokenIcon : dkpInfo.tokenIcon,
+              dkpInfo.token_icon == null ? results[0].token_icon : dkpInfo.token_icon,
               dkpInfo.email == null ? results[0].email : dkpInfo.email,
               dkpInfo.admin_address == null ? results[0].admin_address : dkpInfo.admin_address,
               parseInt(poolId)

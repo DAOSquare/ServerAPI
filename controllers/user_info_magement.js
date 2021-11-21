@@ -6,7 +6,7 @@ class UserInfo {
         let sql = `INSERT INTO address_role
      (address, role) VALUES(?,?)`;
         let todo = [
-            userInfo.walletAddress == null ? "" : userInfo.walletAddress,
+            userInfo.wallet_address == null ? "" : userInfo.wallet_address,
             userInfo.role == null ? 1 : userInfo.role,
 
         ];

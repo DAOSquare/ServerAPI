@@ -9,7 +9,7 @@ const router = express.Router();
 
 //Get all wins.
 router.get('/', async (req, res) => {
-    const address = req.query.walletAddress;
+    const address = req.query.wallet_address;
     const message = req.query.message;
     const signature = req.query.signature;
     if (address == null || message == null || signature == null) {
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
                 "charset": "UTF-8", //定义返回内容的编码
                 "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
                 "result": { //返回的结果
-                    "error message": "params walletAddress or message or signature not found",
+                    "error message": "params wallet_address or message or signature not found",
                 }
             }
         });
@@ -95,8 +95,8 @@ router.post('/new_win', async (req, res) => {
         formData.cost_per_nft == null || formData.cost_per_nft == '' ||
         formData.total_num_of_mint == null || formData.total_num_of_mint == '' ||
         formData.time_start == null || formData.time_start.length == '' ||
-        formData.time_end == null || formData.time_end == '' ||
-        formData.walletAddress == null || formData.walletAddress.length == 0 ||
+        // formData.time_end == null || formData.time_end == '' ||
+        formData.wallet_address == null || formData.wallet_address.length == 0 ||
         formData.signature == null || formData.signature.length == 0 ||
         formData.message == null || formData.message.length == 0 ||
         costNFTList.length > 4 || costNFTList.length == 0
@@ -112,7 +112,7 @@ router.post('/new_win', async (req, res) => {
             }
         });
     } else {
-        const verifyResult = await veirySignature(formData.walletAddress, formData.message, formData.signature);
+        const verifyResult = await veirySignature(formData.wallet_address, formData.message, formData.signature);
         if (!verifyResult) {
             res.json({
                 "response": {
@@ -121,6 +121,20 @@ router.post('/new_win', async (req, res) => {
                     "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
                     "result": { //返回的结果
                         "error message": "Signature Verify Failed",
+                    }
+                }
+            });
+            return;
+        }
+        if (!checkIfInteger(formData.total_num_of_mint) ||
+            !checkIfInteger(formData.time_start)) {
+            res.json({
+                "response": {
+                    "status": 400, //或其他状态码
+                    "charset": "UTF-8", //定义返回内容的编码
+                    "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
+                    "result": { //返回的结果
+                        "error message": "total_num_of_mint && time_start must be numbers",
                     }
                 }
             });
@@ -166,7 +180,7 @@ router.put('/:winId', async (req, res) => {
     let formData = req.body;
     if (
         formData.nft_icon == null ||
-        formData.walletAddress == null ||
+        formData.wallet_address == null ||
         formData.signature == null || formData.message == null) {
         res.json({
             "response": {
@@ -181,7 +195,7 @@ router.put('/:winId', async (req, res) => {
         return;
     }
 
-    const verifyResult = await veirySignature(formData.walletAddress, formData.message, formData.signature);
+    const verifyResult = await veirySignature(formData.wallet_address, formData.message, formData.signature);
     if (!verifyResult) {
         res.json({
             "response": {
@@ -244,7 +258,7 @@ router.put('/audit/:winId', async (req, res) => {
         })
         let formData = req.body;
         if (formData.audit_result == null || formData.audit_result == '' ||
-            formData.walletAddress == null || formData.walletAddress.length == 0 ||
+            formData.wallet_address == null || formData.wallet_address.length == 0 ||
             formData.signature == null || formData.signature.length == 0 ||
             formData.message == null || formData.message.length == 0) {
             res.json({
@@ -274,7 +288,7 @@ router.put('/audit/:winId', async (req, res) => {
             });
             return;
         }
-        const verifyResult = await veirySignature(formData.walletAddress, formData.message, formData.signature);
+        const verifyResult = await veirySignature(formData.wallet_address, formData.message, formData.signature);
         if (!verifyResult) {
             res.json({
                 "response": {

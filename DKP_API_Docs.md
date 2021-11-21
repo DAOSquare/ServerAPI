@@ -50,7 +50,7 @@ http://47.241.127.229:5000/api/user/regiser
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
 | --- | --- | --- | --- | --- |
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
-| **walletAddress** | **是** | **String** | **无** | **用户地址** |
+| **wallet_address** | **是** | **String** | **无** | **用户地址** |
 | **message** | **是** | **String** | **无** | **签名内容** |
 | **role** | **是** | **int** | **无** | **用户角色 1 普通账户地址 2 管理员账户地址** |
 
@@ -133,7 +133,7 @@ http://47.241.127.229:5000/api/user/login
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
 | --- | --- | --- | --- | --- |
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
-| **walletAddress** | **是** | **String** | **无** | **用户地址** |
+| **wallet_address** | **是** | **String** | **无** | **用户地址** |
 | **message** | **是** | **String** | **无** | **签名内容** |
 
 
@@ -187,7 +187,7 @@ http://47.241.127.229:5000/api/user/login
 ### 请求地址
 
 
-http://47.241.127.229:5000/api/user/user_info/walletAddress
+http://47.241.127.229:5000/api/user/user_info/wallet_address
 
 
 ### 请求方式
@@ -279,7 +279,7 @@ http://47.241.127.229:5000/api/user/user_info/walletAddress
 ### 请求地址
 
 
-http://47.241.127.229:5000/api/user/user_login_info/walletAddress
+http://47.241.127.229:5000/api/user/user_login_info/wallet_address
 
 
 ### 请求方式
@@ -366,7 +366,7 @@ DKPool申请列表
 ### 请求地址
 
 
-http://47.241.127.229:5000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bcc36010bbdacd23278002f6b4bbfcdec75e90de5d6d06963d5ecc319ebdcb531aff06790079dc07c78f9782c8020bbd5abb01b&walletAddress=0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79&message=Hello%20world
+http://47.241.127.229:5000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bcc36010bbdacd23278002f6b4bbfcdec75e90de5d6d06963d5ecc319ebdcb531aff06790079dc07c78f9782c8020bbd5abb01b&wallet_address=0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79&message=Hello%20world
 
 
 ### 请求方式
@@ -396,7 +396,7 @@ http://47.241.127.229:5000/api/dkpool/?signature=0x2efecd7f36034ccb70708a7f899bc
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
 | --- | --- | --- | --- | --- |
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
-| **walletAddress** | **是** | **String** | **无** | **用户地址** |
+| **wallet_address** | **是** | **String** | **无** | **用户地址** |
 | **message** | **是** | **String** | **无** | **签名内容** |
 
 
@@ -624,7 +624,7 @@ http://47.241.127.229:5000/api/dkpool/new_dkpool
 | **admin_address** | **是** | **String** |**无**| **管理员地址** |
 | **email** | **是** | **String** |**无**|**接收通知邮件地址** |
 | **note** | **否** | **String** |**无**|**池子说明** |
-| **walletAddress** | **是** | **String** |**无**| **用户地址** |
+| **wallet_address** | **是** | **String** |**无**| **用户地址** |
 | **signature** | **是** | **String** |**无**| **用户签名信息** |
 | **message** | **是** | **String** |**无**| **签名内容** |
 
@@ -721,7 +721,7 @@ http://47.241.127.229:5000/api/dkpool/poolid
 | **token_name** | **是** | **String** |**无**| **token  的名称。** |
 | **token_icon** | **是** | **String** |**无** | **token 图标的 url** |
 | **email** | **是** | **String** |**无**| **接收通知邮件地址** |
-| **walletAddress** | **是** | **String** |**无**| **用户地址**|
+| **wallet_address** | **是** | **String** |**无**| **用户地址**|
 | **signature** | **是** | **String** |**无**| **用户签名信息**|
 | **message** | **是** | **String** |**无**| **签名内容**|
 
@@ -814,7 +814,7 @@ http://47.241.127.229:5000/api/dkpool/audit/poolid
 | --- | --- | --- | --- | --- |
 | **audit_result** | **是** | **int** | **无** | **审批结果： 2 pass 3 fail** |
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
-| **walletAddress** | **是** | **String** | **无** | **用户地址** |
+| **wallet_address** | **是** | **String** | **无** | **用户地址** |
 | **message** | **是** | **String** | **无** | **签名内容** |
 
 
@@ -875,7 +875,7 @@ NFT Win申请列表
 
 
 
-http://47.241.127.229:5000/api/win/?signature=0x2efecd7f36034ccb70708a7f899bcc36010bbdacd23278002f6b4bbfcdec75e90de5d6d06963d5ecc319ebdcb531aff06790079dc07c78f9782c8020bbd5abb01b&walletAddress=0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79&message=Hello%20world
+http://47.241.127.229:5000/api/win/?signature=0x2efecd7f36034ccb70708a7f899bcc36010bbdacd23278002f6b4bbfcdec75e90de5d6d06963d5ecc319ebdcb531aff06790079dc07c78f9782c8020bbd5abb01b&wallet_address=0x44dDd4501eE8c55AAF80658E50a67Ac4ae8Faa79&message=Hello%20world
 
 
 ### 请求方式
@@ -907,7 +907,7 @@ http://47.241.127.229:5000/api/win/?signature=0x2efecd7f36034ccb70708a7f899bcc36
 | **参数名** | **必选** | **类型** | **限制条件** | **说明** |
 | --- | --- | --- | --- | --- |
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
-| **walletAddress** | **是** | **String** | **无** | **用户地址** |
+| **wallet_address** | **是** | **String** | **无** | **用户地址** |
 | **message** | **是** | **String** | **无** | **签名内容** |
 
 
@@ -1133,7 +1133,7 @@ http://47.241.127.229:5000/api/win/new_win
 | **time_start** | **是** | **int** |**无** | **开始兑换的时间 ( 时间戳 )** |
 | **time_end** | **否** | **int** |**无**   | **结束兑换的时间 ( 时间戳 )** |
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
-| **walletAddress** | **是** | **String** | **无** | **用户地址** |
+| **wallet_address** | **是** | **String** | **无** | **用户地址** |
 | **message** | **是** | **String** | **无** | **签名内容** |
 
 
@@ -1226,7 +1226,7 @@ http://47.241.127.229:5000/api/win/winId
 | --- | --- | --- | --- | --- |
 | **nft_icon** | **是** | **String** |**无**| **nft 的资源素材** |
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
-| **walletAddress** | **是** | **String** | **无** | **用户地址** |
+| **wallet_address** | **是** | **String** | **无** | **用户地址** |
 | **message** | **是** | **String** | **无** | **签名内容** |
 
 
@@ -1319,7 +1319,7 @@ http://47.241.127.229:5000/api/win/winId
 | --- | --- | --- | --- | --- |
 | **audit_result** | **是** | **int** | **无** | **审批结果： 2 pass 3 fail** |
 | **signature** | **是** | **String** | **无** | **用户地址签名** |
-| **walletAddress** | **是** | **String** | **无** | **用户地址** |
+| **wallet_address** | **是** | **String** | **无** | **用户地址** |
 | **message** | **是** | **String** | **无** | **签名内容** |
 
 

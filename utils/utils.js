@@ -20,7 +20,7 @@ function verifyAddress(address) {
 
 // console.log(checkName('~fsfsdf2'));
 function checkIfInteger(str) {
-    var re = /^[0-9]*$/;  //判断字符串是否为数字和字母组合     
+    var re = /^[0-9]*$/;  //判断字符串是否为数字
     if (!re.test(str)) {
         return false;
     } else {

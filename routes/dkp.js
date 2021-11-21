@@ -7,20 +7,20 @@ const router = express.Router();
 
 //Get all pools.
 router.get('/', async (req, res) => {
-    if (req.query.walletAddress == null || req.query.message == null || req.query.signature == null) {
+    if (req.query.wallet_address == null || req.query.message == null || req.query.signature == null) {
         res.json({
             "response": {
                 "status": 400, //或其他状态码
                 "charset": "UTF-8", //定义返回内容的编码
                 "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
                 "result": { //返回的结果
-                    "error message": "params walletAddress or message or signature not found",
+                    "error message": "params wallet_address or message or signature not found",
                 }
             }
         });
         return;
     }
-    const address = req.query.walletAddress;
+    const address = req.query.wallet_address;
     const message = req.query.message;
     const signature = req.query.signature;
     const verifyResult = await veirySignature(address, message, signature);
@@ -83,18 +83,18 @@ router.post('/new_dkpool', async (req, res) => {
     let formData = req.body;
     if (formData.pool_name == null || formData.pool_name == '' ||
         formData.pool_desc == null || formData.pool_desc == '' ||
-        formData.poolIcon == null || formData.poolIcon == '' ||
+        formData.pool_icon == null || formData.pool_icon == '' ||
         formData.type == null || formData.type == '' ||
         formData.cost_per_token == null || formData.cost_per_token == '' ||
         formData.token_address == null || formData.token_address == '' ||
         formData.token_name == null || formData.token_name == '' ||
-        formData.tokenIcon == null || formData.tokenIcon == '' ||
+        formData.token_icon == null || formData.token_icon == '' ||
         formData.time_start == null || formData.time_start == '' ||
-        formData.time_end == null || formData.time_end == '' ||
+        // formData.time_end == null || formData.time_end == '' ||
         formData.admin_address == null || formData.admin_address == '' ||
         // formData.note == null || formData.note == '' ||
         formData.email == null || formData.email == '' ||
-        formData.walletAddress == null || formData.walletAddress == '' ||
+        formData.wallet_address == null || formData.wallet_address == '' ||
         formData.signature == null || formData.signature == '' ||
         formData.message == null || formData.message == ''
     ) {
@@ -111,7 +111,7 @@ router.post('/new_dkpool', async (req, res) => {
         return;
     }
     else {
-        const verifyResult = await veirySignature(formData.walletAddress, formData.message, formData.signature);
+        const verifyResult = await veirySignature(formData.wallet_address, formData.message, formData.signature);
         if (!verifyResult) {
             res.json({
                 "response": {
@@ -133,6 +133,21 @@ router.post('/new_dkpool', async (req, res) => {
                     "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
                     "result": { //返回的结果
                         "error message": "pool_name  && pool_desc Only supports letters and numbers",
+                    }
+                }
+            });
+            return;
+        }
+        if (!checkIfInteger(formData.type) ||
+            !checkIfInteger(formData.cost_per_token) ||
+            !checkIfInteger(formData.time_start)) {
+            res.json({
+                "response": {
+                    "status": 400, //或其他状态码
+                    "charset": "UTF-8", //定义返回内容的编码
+                    "respond_time": sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss'), //接口响应时间戳
+                    "result": { //返回的结果
+                        "error message": "type && cost_per_token && time_start must be numbers",
                     }
                 }
             });
@@ -173,9 +188,9 @@ router.put('/:poolId', async (req, res) => {
     if (req.params.poolId) {
 
         let formData = req.body;
-        if (formData.pool_desc == null || formData.poolIcon == null ||
-            formData.token_name == null || formData.tokenIcon == null
-            || formData.email == null || formData.walletAddress == null ||
+        if (formData.pool_desc == null || formData.pool_icon == null ||
+            formData.token_name == null || formData.token_icon == null
+            || formData.email == null || formData.wallet_address == null ||
             formData.signature == null || formData.message == null || formData.admin_address) {
             res.json({
                 "response": {
@@ -202,7 +217,7 @@ router.put('/:poolId', async (req, res) => {
             });
             return;
         }
-        const verifyResult = await veirySignature(formData.walletAddress, formData.message, formData.signature);
+        const verifyResult = await veirySignature(formData.wallet_address, formData.message, formData.signature);
         if (!verifyResult) {
             res.json({
                 "response": {
@@ -274,7 +289,7 @@ router.put('/audit/:poolId', async (req, res) => {
             }
         })
         let formData = req.body;
-        if (formData.audit_result == null || formData.walletAddress == null ||
+        if (formData.audit_result == null || formData.wallet_address == null ||
             formData.signature == null || formData.message == null) {
             res.json({
                 "response": {
@@ -303,7 +318,7 @@ router.put('/audit/:poolId', async (req, res) => {
             });
             return;
         }
-        const verifyResult = await veirySignature(formData.walletAddress, formData.message, formData.signature);
+        const verifyResult = await veirySignature(formData.wallet_address, formData.message, formData.signature);
         if (!verifyResult) {
             res.json({
                 "response": {
